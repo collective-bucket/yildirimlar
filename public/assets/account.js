@@ -42,11 +42,18 @@
     return i18n.pick(MESSAGES[key]);
   }
 
-  function setStatus(node, text, kind) {
-    node.textContent = text || "";
-    node.hidden = !text;
+  var shown = null;
+
+  function setStatus(node, key, kind) {
+    shown = key ? { node: node, key: key, kind: kind } : null;
+    node.textContent = key ? msg(key) : "";
+    node.hidden = !key;
     node.classList.toggle("error", kind === "error");
   }
+
+  window.addEventListener("yildirimlar-lang", function () {
+    if (shown) setStatus(shown.node, shown.key, shown.kind);
+  });
 
   function safeNext(fallback) {
     var next = new URLSearchParams(window.location.search).get("next") || "";
@@ -69,7 +76,7 @@
   function fail(error, restore) {
     if (restore) restore();
     var key = ERRORS[error && error.code];
-    setStatus(status, key ? msg(key) : msg("error"), "error");
+    setStatus(status, key || "error", "error");
     if (!key) console.error(error);
   }
 
@@ -153,7 +160,7 @@
     var input = form.querySelector("#password");
     var password = input ? input.value : "";
     if (page === "register" && password.length < 8) {
-      setStatus(status, msg("weak"), "error");
+      setStatus(status, "weak", "error");
       return;
     }
     busy(true);
@@ -163,7 +170,7 @@
         if (page === "forgot") {
           return auth.reset(email).then(function () {
             idle();
-            setStatus(status, msg("resetSent"));
+            setStatus(status, "resetSent");
           });
         }
         var action = page === "register" ? auth.register : auth.signIn;
@@ -172,7 +179,7 @@
       .catch(function (error) {
         if (page === "forgot" && error && error.code === "auth/user-not-found") {
           idle();
-          setStatus(status, msg("resetSent"));
+          setStatus(status, "resetSent");
           return;
         }
         fail(error, idle);
