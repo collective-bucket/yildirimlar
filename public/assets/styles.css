@@ -100,3 +100,20 @@ p { margin: 0 0 1rem; }
   .nav { display: none; width: 100%; order: 3; flex-direction: column; gap: .5rem; }
   .site-header.open .nav { display: flex; }
 }
+
+.page-narrow { max-width: 26rem; }
+.auth-form { display: grid; gap: .9rem; margin-bottom: 1rem; }
+.field { display: grid; gap: .3rem; font-weight: 600; font-size: .95rem; }
+.field input {
+  font: inherit; font-weight: 400; padding: .6rem .75rem; border: 1px solid var(--line);
+  border-radius: 8px; background: var(--card); color: var(--ink);
+}
+.field input:focus { border-color: var(--accent); }
+.button { border: 0; font: inherit; font-weight: 600; cursor: pointer; }
+.button.block { width: 100%; text-align: center; }
+.button.danger { background: #8c2f23; }
+.button:disabled { opacity: .6; cursor: wait; }
+.or { text-align: center; color: var(--muted); margin: 0; font-size: .9rem; }
+.status { padding: .6rem .8rem; border-radius: 8px; background: var(--spark-soft); }
+.status.error { background: #f6d9d4; color: #6b1f15; }
+.auth-links { display: flex; flex-direction: column; gap: .4rem; font-size: .95rem; }
