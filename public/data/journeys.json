@@ -1,0 +1,12 @@
+[
+  {
+    "place": "Kayaköy",
+    "region": { "en": "Fethiye, Muğla", "tr": "Fethiye, Muğla" },
+    "notes": { "en": "A hillside village of stone houses, left empty after the 1923 population exchange.", "tr": "1923 nüfus mübadelesinden sonra boşalan, yamaçta taş evlerden oluşan bir köy." }
+  },
+  {
+    "place": "Kaunos",
+    "region": { "en": "Dalyan, Köyceğiz, Muğla", "tr": "Dalyan, Köyceğiz, Muğla" },
+    "notes": { "en": "An ancient city on the Lycian–Carian border, known for its rock-cut tombs.", "tr": "Likya–Karya sınırında, kaya mezarlarıyla bilinen antik kent." }
+  }
+]
