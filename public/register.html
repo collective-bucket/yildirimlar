@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="register.pageTitle">Create account · Yıldırımlar</title>
+  <meta name="description" content="Create a Yıldırımlar account.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body data-page="register">
+  <header class="site-header"></header>
+  <main class="page page-narrow">
+<div class="page-head"><h1 data-i18n="register.title">Create an account</h1><p class="lead" data-i18n="register.lead">An account lets you follow the project; profiles and discussions come later.</p></div><form id="auth-form" class="auth-form" novalidate><button type="button" id="google" class="button ghost block"><span data-i18n="auth.google">Continue with Google</span></button><p class="or" data-i18n="auth.or">or</p><label class="field"><span data-i18n="auth.email">Email</span><input id="email" type="email" autocomplete="email" required></label><label class="field"><span data-i18n="auth.password">Password</span><input id="password" type="password" autocomplete="new-password" required minlength="8"></label><p class="hint" data-i18n="auth.consent">By creating an account you accept the <a href="/terms">terms</a> and the <a href="/privacy">privacy notice</a>.</p><button type="submit" class="button block" data-i18n="auth.submitRegister">Create account</button></form><p id="auth-status" class="status" role="status" hidden></p><p class="auth-links"><a href="/login" data-keep-next data-i18n="auth.toLogin">Already have an account? Sign in</a></p>
+  </main>
+  <footer class="site-footer"></footer>
+  <script src="/assets/i18n.js"></script>
+  <script src="/assets/layout.js"></script>
+  <script src="/assets/config.js"></script>
+  <script type="module" src="/assets/auth.js"></script>
+  <script src="/assets/account.js"></script>
+</body>
+</html>
