@@ -26,10 +26,12 @@ jobs:
           service_account: github-actions-deployer@collective-bucket.iam.gserviceaccount.com
           token_format: access_token
       - run: npm ci
+      - run: npm run check
+      - run: npm run stamp
       - id: deploy
         run: |
           npx firebase-tools hosting:channel:deploy "pr-${{ github.event.pull_request.number }}" \
-            --only hosting:yildirimlar \
+            --only yildirimlar \
             --expires 7d \
             --token "${{ steps.auth.outputs.access_token }}" \
             --non-interactive \

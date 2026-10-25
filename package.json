@@ -2,10 +2,12 @@
   "name": "yildirimlar",
   "version": "0.1.0",
   "private": true,
-  "description": "Yıldırımlar ailesi sitesi.",
+  "description": "Notes toward the Yıldırımlar cooperative in rural Muğla.",
   "license": "MIT",
   "scripts": {
     "serve": "firebase emulators:start --only hosting",
+    "check": "node scripts/check.js",
+    "stamp": "node scripts/stamp-assets.js",
     "deploy": "firebase deploy --only hosting:yildirimlar"
   },
   "devDependencies": {

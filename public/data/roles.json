@@ -1,0 +1,30 @@
+[
+  { "area": { "en": "Production and technical", "tr": "Üretim ve teknik" }, "roles": [
+    { "en": "Mechanical engineer / workshop builder (metal, wood, engines)", "tr": "Makine mühendisi / atölye kurucusu (demir, ağaç, motor)" },
+    { "en": "Ceramicist", "tr": "Seramik ustası" } ] },
+  { "area": { "en": "Digital", "tr": "Dijital" }, "roles": [
+    { "en": "Software developer (site, tools)", "tr": "Yazılım geliştirici (site, araçlar)" },
+    { "en": "Financial systems / accounting software", "tr": "Finansal sistemler / muhasebe yazılımı" } ] },
+  { "area": { "en": "Design and community", "tr": "Tasarım ve topluluk" }, "roles": [
+    { "en": "Designer", "tr": "Tasarımcı" },
+    { "en": "Community facilitator", "tr": "Topluluk kolaylaştırıcısı" },
+    { "en": "Sociocracy practitioner", "tr": "Sosyokrasi pratisyeni" } ] },
+  { "area": { "en": "Site and building", "tr": "Saha ve inşaat" }, "roles": [
+    { "en": "Stone house / natural building", "tr": "Taş ev / doğal yapı ustası" },
+    { "en": "Camp setup", "tr": "Kamp kurulumu" },
+    { "en": "Water and energy infrastructure", "tr": "Su ve enerji altyapısı" } ] },
+  { "area": { "en": "Logistics and health", "tr": "Lojistik ve sağlık" }, "roles": [
+    { "en": "Paramedic / first aid", "tr": "Paramedik / ilk yardım" },
+    { "en": "Kitchen and supplies", "tr": "Mutfak ve iaşe" },
+    { "en": "Crisis management", "tr": "Kriz yönetimi" } ] },
+  { "area": { "en": "Education", "tr": "Eğitim" }, "roles": [
+    { "en": "Educator with village-institute or alternative school experience", "tr": "Köy enstitüsü / alternatif okul deneyimi olan eğitimci" },
+    { "en": "Art and philosophy workshop leader", "tr": "Sanat ve felsefe atölyesi yürütücüsü" } ] },
+  { "area": { "en": "Law and regulation", "tr": "Hukuk ve mevzuat" }, "roles": [
+    { "en": "Cooperative lawyer", "tr": "Kooperatif hukukçusu" },
+    { "en": "Accountant (mali müşavir)", "tr": "Mali müşavir" },
+    { "en": "Zoning and land-use adviser", "tr": "İmar ve arazi kullanımı danışmanı" } ] },
+  { "area": { "en": "Network and resources", "tr": "Ağ ve kaynak" }, "roles": [
+    { "en": "Funding and grants researcher", "tr": "Fon ve hibe araştırmacısı" },
+    { "en": "Supporters and backers (no decision weight)", "tr": "Destekçi ve yatırımcı ağı (karar ağırlığı yok)" } ] }
+]

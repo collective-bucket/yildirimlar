@@ -1,0 +1,41 @@
+[
+  {
+    "id": 0,
+    "status": "active",
+    "title": { "en": "Phase 0 · Exploration", "tr": "Faz 0 · Keşif" },
+    "goal": { "en": "This site, a map of communities and people interested, visits to communities, legal research.", "tr": "Bu site, toplulukların ve ilgilenenlerin haritası, topluluk ziyaretleri, hukuki araştırma." },
+    "exit": { "en": "20+ people registered, 10+ complete profiles, a lawyer's view on the cooperative model.", "tr": "20+ kayıtlı kişi, 10+ dolu profil, kooperatif modeli için bir hukukçu görüşü." },
+    "budget": { "en": "About zero", "tr": "Yaklaşık sıfır" }
+  },
+  {
+    "id": 1,
+    "status": "next",
+    "title": { "en": "Phase 1 · Core circle", "tr": "Faz 1 · Çekirdek çember" },
+    "goal": { "en": "A core circle of 7–12 people, a draft of the articles of association, practice with consent decisions.", "tr": "7–12 kişilik çekirdek çember, ana sözleşme taslağı, rıza ile karar alma pratiği." },
+    "exit": { "en": "Consent of seven founding partners and a legal entity.", "tr": "Yedi kurucu ortağın rızası ve tüzel kişilik." },
+    "budget": { "en": "Low", "tr": "Düşük" }
+  },
+  {
+    "id": 2,
+    "status": "later",
+    "title": { "en": "Phase 2 · Land", "tr": "Faz 2 · Arazi" },
+    "goal": { "en": "Choose and buy land in rural Muğla.", "tr": "Muğla kırsalında arazi seçimi ve alımı." },
+    "exit": { "en": "Title deed.", "tr": "Tapu." },
+    "budget": { "en": "2M TL", "tr": "2M TL" }
+  },
+  {
+    "id": 3,
+    "status": "later",
+    "title": { "en": "Phase 3 · Building", "tr": "Faz 3 · Kurulum" },
+    "goal": { "en": "Build in phases: first the shared space, kitchen and one workshop, then dormitories.", "tr": "Fazlı inşaat: önce ortak alan, mutfak ve bir atölye; sonra koğuşlar." },
+    "exit": { "en": "The first ten people can live on site.", "tr": "İlk on kişi yerinde yaşayabiliyor." },
+    "budget": { "en": "2M TL, in phases", "tr": "2M TL, fazlı" }
+  },
+  {
+    "id": 4,
+    "status": "later",
+    "title": { "en": "Phase 4 · Minimum Viable Community", "tr": "Faz 4 · Minimum Viable Community" },
+    "goal": { "en": "First workshops and classes, first income.", "tr": "İlk atölyeler ve dersler, ilk gelir." },
+    "exit": { "en": "One line of production that covers its own costs.", "tr": "Kendi giderini karşılayan bir üretim hattı." }
+  }
+]

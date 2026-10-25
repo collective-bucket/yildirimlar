@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Matematik Köyü",
+    "place": { "en": "Şirince, Selçuk, İzmir", "tr": "Şirince, Selçuk, İzmir" },
+    "url": "https://matematikkoyu.org",
+    "model": { "en": "A foundation-run village of summer schools in mathematics, philosophy and theatre; students and teachers live and learn on site.", "tr": "Bir vakfın yürüttüğü, matematik, felsefe ve tiyatro yaz okullarının yapıldığı köy; öğrenciler ve hocalar aynı yerde yaşayıp öğreniyor." }
+  },
+  {
+    "name": "Kabak",
+    "place": { "en": "Kabak Valley, Fethiye, Muğla", "tr": "Kabak Koyu, Fethiye, Muğla" },
+    "model": { "en": "Small camps in a remote valley, living on seasonal tourism.", "tr": "Uzak bir vadide, mevsimlik turizmle ayakta duran küçük kamplar." }
+  }
+]
