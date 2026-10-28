@@ -44,7 +44,7 @@
   function field(card, key, value) {
     var text = pick(value);
     if (!text) return;
-    var row = el("p", "field");
+    var row = el("p", "meta");
     row.appendChild(el("strong", null, label(key) + ": "));
     row.appendChild(document.createTextNode(text));
     card.appendChild(row);

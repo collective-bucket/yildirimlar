@@ -79,7 +79,8 @@ p { margin: 0 0 1rem; }
 .items { display: grid; gap: 1rem; }
 .roles { grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
 .item h2 { margin-top: 0; display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
-.item .field { margin-bottom: .4rem; }
+.item .meta { margin-bottom: .4rem; }
+.item .meta strong { font-weight: 600; }
 .badge { font-size: .75rem; font-weight: 600; padding: .1rem .55rem; border-radius: 999px; background: var(--line); color: var(--ink); }
 .phase-active { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
 .phase-active .badge { background: var(--accent-pastel); }
@@ -118,7 +119,7 @@ p { margin: 0 0 1rem; }
 .button { border: 0; font: inherit; font-weight: 600; cursor: pointer; }
 .button.block { width: 100%; text-align: center; }
 .button.danger { background: var(--danger); }
-.button:hover { background: var(--accent-strong); }
+.button:not(.ghost):not(.danger):hover { background: var(--accent-strong); }
 .button.ghost:hover { background: var(--accent-soft); }
 .button:disabled { opacity: .6; cursor: wait; }
 .or { text-align: center; color: var(--muted); margin: 0; font-size: .9rem; }
