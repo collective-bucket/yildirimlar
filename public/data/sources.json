@@ -4,14 +4,30 @@
     "title": "Bullshit Jobs: A Theory",
     "author": "David Graeber",
     "year": 2018,
-    "why": { "en": "Why so much modern work feels pointless, and what that says about how work is organised.", "tr": "Modern işlerin çoğunun neden anlamsız geldiği ve bunun işin örgütlenmesi hakkında söyledikleri." }
+    "why": {
+      "en": "Why so much modern work feels pointless, and what that says about how work is organised.",
+      "tr": "Modern işlerin çoğunun neden anlamsız geldiği ve bunun işin örgütlenmesi hakkında söyledikleri."
+    }
   },
   {
     "type": "book",
     "title": "Debt: The First 5,000 Years",
     "author": "David Graeber",
     "year": 2011,
-    "why": { "en": "Debt, money and mutual obligation in human communities; background for sweat equity.", "tr": "İnsan topluluklarında borç, para ve karşılıklı yükümlülük; ter sermayesi için arka plan." }
+    "why": {
+      "en": "Debt, money and mutual obligation in human communities; background for sweat equity.",
+      "tr": "İnsan topluluklarında borç, para ve karşılıklı yükümlülük; ter sermayesi için arka plan."
+    }
+  },
+  {
+    "type": "book",
+    "title": "Türkiye'de Köy Politikası",
+    "author": "Ezgi Turmuş Binici",
+    "year": 2021,
+    "why": {
+      "en": "How village policy in Türkiye changed as the country joined global capitalism, read against rural transformation, the future of farming and food sovereignty (Libra Kitap).",
+      "tr": "Türkiye'nin küresel kapitalizmle bütünleşme sürecinde köy politikalarının nasıl değiştiği; kırsalın dönüşümü, tarımsal üretimin geleceği ve gıda egemenliği ekseninde (Libra Kitap)."
+    }
   },
   {
     "type": "law",
@@ -19,6 +35,9 @@
     "author": "T.C.",
     "year": 1969,
     "url": "https://www.mevzuat.gov.tr/mevzuatmetin/1.5.1163.pdf",
-    "why": { "en": "The legal frame for founding a cooperative in Türkiye.", "tr": "Türkiye'de kooperatif kurmanın hukuki çerçevesi." }
+    "why": {
+      "en": "The legal frame for founding a cooperative in Türkiye.",
+      "tr": "Türkiye'de kooperatif kurmanın hukuki çerçevesi."
+    }
   }
 ]
