@@ -29,6 +29,23 @@ data["roadmap.json"].forEach(function (p, i) {
   ["title", "goal", "exit", "budget"].forEach(function (k) { bilingual(p[k], "roadmap[" + i + "]." + k); });
 });
 data["sources.json"].forEach(function (s, i) { assert.ok(s.type && s.title, "sources[" + i + "]"); bilingual(s.why, "sources[" + i + "].why"); });
+function image(img, where) {
+  if (!img) return;
+  assert.ok(fs.existsSync(path.join(pub, img.src)), where + ".image missing: " + img.src);
+  assert.ok(img.credit && img.credit.author && img.credit.license && img.credit.url, where + ".image needs credit");
+}
+data["journeys.json"].forEach(function (j, i) { ["region", "notes", "lesson"].forEach(function (k) { bilingual(j[k], "journeys[" + i + "]." + k); }); image(j.image, "journeys[" + i + "]"); });
+data["communities.json"].forEach(function (c, i) {
+  ["kind", "place", "model", "lesson"].forEach(function (k) { bilingual(c[k], "communities[" + i + "]." + k); });
+  ["works", "fails"].forEach(function (k) { (c[k] || []).forEach(function (v, j) { bilingual(v, "communities[" + i + "]." + k + "[" + j + "]"); }); });
+  image(c.image, "communities[" + i + "]");
+});
+data["principles.json"].forEach(function (p, i) { bilingual(p.title, "principles[" + i + "].title"); bilingual(p.body, "principles[" + i + "].body"); });
+for (var page of fs.readdirSync(pub).filter(function (f) { return f.endsWith(".html"); })) {
+  for (var s of fs.readFileSync(path.join(pub, page), "utf8").matchAll(/src="(\/assets\/img\/[^"]+)"/g)) {
+    assert.ok(fs.existsSync(path.join(pub, s[1])), page + ": missing image " + s[1]);
+  }
+}
 data["roles.json"].forEach(function (g, i) { bilingual(g.area, "roles[" + i + "]"); g.roles.forEach(function (r, j) { bilingual(r, "roles[" + i + "][" + j + "]"); }); });
 
 var i18n = require(path.join(assets, "i18n.js"));

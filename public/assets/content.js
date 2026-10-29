@@ -50,6 +50,43 @@
     card.appendChild(row);
   }
 
+  function points(card, key, values) {
+    if (!values || !values.length) return;
+    card.appendChild(el("p", "meta points-title", label(key)));
+    var list = el("ul", "list points points-" + key);
+    values.forEach(function (value) {
+      list.appendChild(el("li", null, pick(value)));
+    });
+    card.appendChild(list);
+  }
+
+  function withMedia(card, image) {
+    if (!image) return card;
+    card.classList.add("has-media");
+    var figure = el("figure", "media");
+    var img = el("img");
+    img.src = image.src;
+    img.alt = "";
+    img.loading = "lazy";
+    img.width = 800;
+    img.height = 600;
+    figure.appendChild(img);
+    if (image.credit) {
+      var caption = el("figcaption", "credit");
+      var link = el("a", null, image.credit.author + " · " + image.credit.license);
+      link.href = image.credit.url;
+      link.rel = "noopener";
+      link.target = "_blank";
+      caption.appendChild(link);
+      figure.appendChild(caption);
+    }
+    var body = el("div", "body");
+    while (card.firstChild) body.appendChild(card.firstChild);
+    card.appendChild(figure);
+    card.appendChild(body);
+    return card;
+  }
+
   var renderers = {
     roadmap: function (item) {
       var card = el("article", "item phase phase-" + item.status);
@@ -68,7 +105,7 @@
       field(card, "when", item.when);
       field(card, "notes", item.notes);
       field(card, "lesson", item.lesson);
-      return card;
+      return withMedia(card, item.image);
     },
     communities: function (item) {
       var card = el("article", "item");
@@ -82,13 +119,14 @@
       } else {
         title.textContent = item.name;
       }
+      if (item.kind) title.appendChild(el("span", "badge", pick(item.kind)));
       card.appendChild(title);
       card.appendChild(el("p", "hint", pick(item.place)));
       field(card, "model", item.model);
-      field(card, "works", item.works);
-      field(card, "fails", item.fails);
+      points(card, "works", item.works);
+      points(card, "fails", item.fails);
       field(card, "lesson", item.lesson);
-      return card;
+      return withMedia(card, item.image);
     },
     sources: function (item) {
       var card = el("article", "item source");
@@ -106,6 +144,12 @@
       card.appendChild(title);
       card.appendChild(el("p", "hint", [label(item.type), item.author, item.year].filter(Boolean).join(" · ")));
       field(card, "why", item.why);
+      return card;
+    },
+    principles: function (item) {
+      var card = el("li", "principle");
+      card.appendChild(el("h3", null, pick(item.title)));
+      card.appendChild(el("p", null, pick(item.body)));
       return card;
     },
     roles: function (group) {
