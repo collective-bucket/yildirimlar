@@ -1,12 +1,78 @@
 [
   {
     "place": "Kayaköy",
-    "region": { "en": "Fethiye, Muğla", "tr": "Fethiye, Muğla" },
-    "notes": { "en": "A hillside village of stone houses, left empty after the 1923 population exchange.", "tr": "1923 nüfus mübadelesinden sonra boşalan, yamaçta taş evlerden oluşan bir köy." }
+    "region": {
+      "en": "Fethiye, Muğla",
+      "tr": "Fethiye, Muğla"
+    },
+    "image": {
+      "src": "/assets/img/kayakoy.webp",
+      "credit": {
+        "author": "Jorge Franganillo",
+        "license": "CC BY-SA 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Kayak%C3%B6y_2014.jpg"
+      }
+    },
+    "notes": {
+      "en": "A hillside village of stone houses, left empty after the 1923 population exchange. I also spent time at the Ya Basta camp here; see Communities.",
+      "tr": "1923 nüfus mübadelesinden sonra boşalan, yamaçta taş evlerden oluşan bir köy. Buradaki Ya Basta kampında da bulundum; bkz. Topluluklar."
+    }
+  },
+  {
+    "place": "Kabak",
+    "region": {
+      "en": "Kabak Valley, Fethiye, Muğla",
+      "tr": "Kabak Koyu, Fethiye, Muğla"
+    },
+    "image": {
+      "src": "/assets/img/kabak.webp",
+      "credit": {
+        "author": "canonim",
+        "license": "CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Kabak_Valley_beach.jpg"
+      }
+    },
+    "notes": {
+      "en": "A remote valley on the Lycian Way, reached by a steep road; small camps live off seasonal tourism. I took part in the Natural Life camp here; see Communities.",
+      "tr": "Likya Yolu üzerinde, dik bir yolla inilen uzak bir vadi; küçük kamplar mevsimlik turizmle ayakta duruyor. Buradaki Natural Life kampına katıldım; bkz. Topluluklar."
+    }
+  },
+  {
+    "place": "Şirince",
+    "region": {
+      "en": "Selçuk, İzmir",
+      "tr": "Selçuk, İzmir"
+    },
+    "image": {
+      "src": "/assets/img/sirince.webp",
+      "credit": {
+        "author": "Lastradadeisogni",
+        "license": "CC BY-SA 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:View_of_Sirince_from_the_church.jpg"
+      }
+    },
+    "notes": {
+      "en": "A hillside village above Selçuk, home to the Nesin Mathematics Village. See Communities for my notes on the Mathematics Village.",
+      "tr": "Selçuk'un yukarısında, Nesin Matematik Köyü'nün bulunduğu yamaç köyü. Matematik Köyü notlarım için bkz. Topluluklar."
+    }
   },
   {
     "place": "Kaunos",
-    "region": { "en": "Dalyan, Köyceğiz, Muğla", "tr": "Dalyan, Köyceğiz, Muğla" },
-    "notes": { "en": "An ancient city on the Lycian–Carian border, known for its rock-cut tombs.", "tr": "Likya–Karya sınırında, kaya mezarlarıyla bilinen antik kent." }
+    "region": {
+      "en": "Dalyan, Köyceğiz, Muğla",
+      "tr": "Dalyan, Köyceğiz, Muğla"
+    },
+    "image": {
+      "src": "/assets/img/kaunos.webp",
+      "credit": {
+        "author": "Ad Meskens",
+        "license": "CC BY-SA 3.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Kaunos_1.JPG"
+      }
+    },
+    "notes": {
+      "en": "An ancient city on the Lycian–Carian border, known for its rock-cut tombs.",
+      "tr": "Likya–Karya sınırında, kaya mezarlarıyla bilinen antik kent."
+    }
   }
 ]

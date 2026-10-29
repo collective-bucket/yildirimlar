@@ -1,13 +1,134 @@
 [
   {
-    "name": "Matematik Köyü",
-    "place": { "en": "Şirince, Selçuk, İzmir", "tr": "Şirince, Selçuk, İzmir" },
-    "url": "https://matematikkoyu.org",
-    "model": { "en": "A foundation-run village of summer schools in mathematics, philosophy and theatre; students and teachers live and learn on site.", "tr": "Bir vakfın yürüttüğü, matematik, felsefe ve tiyatro yaz okullarının yapıldığı köy; öğrenciler ve hocalar aynı yerde yaşayıp öğreniyor." }
+    "name": "Natural Life",
+    "kind": {
+      "en": "Commercial tourism camp",
+      "tr": "Ticari turizm kampı"
+    },
+    "place": {
+      "en": "Kabak Valley, Fethiye, Muğla",
+      "tr": "Kabak Koyu, Fethiye, Muğla"
+    },
+    "image": {
+      "src": "/assets/img/natural-life.webp",
+      "credit": {
+        "author": "canonim",
+        "license": "CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Kabak_Vadisi.jpg"
+      }
+    },
+    "model": {
+      "en": "A commercial tourism business centred on consumption and service. Days ran on long shifts (4–6 hours a day) and clear physical routines, mostly café and service work.",
+      "tr": "Tüketim ve hizmet odaklı ticari bir turizm işletmesi. Günler uzun mesailer (günde 4–6 saat) ve net fiziksel rutinlerle, çoğunlukla kafe ve servis işleriyle geçiyordu."
+    },
+    "works": [
+      {
+        "en": "Administrative and legal matters were handled competently and professionally, which kept day-to-day work on solid ground.",
+        "tr": "İdari ve hukuki süreçler yetkin ve profesyonel biçimde yürütülüyordu; bu, sahadaki günlük işleyişi güvence altına alıyordu."
+      }
+    ],
+    "fails": [
+      {
+        "en": "No systematic rotation or days off: rest depended on personal initiative and asking favours.",
+        "tr": "Sistematik bir rotasyon ya da izin düzeni yoktu; dinlenme kişisel inisiyatife ve rica ilişkilerine kalıyordu."
+      },
+      {
+        "en": "Pressure to keep guests happy pushed participants into the role of entertainers.",
+        "tr": "Misafiri memnun etme baskısı katılımcıyı “eğlendirici” konumuna itiyordu."
+      },
+      {
+        "en": "An unbounded flow of people and a party culture made social life chaotic.",
+        "tr": "Sınırsız insan sirkülasyonu ve parti kültürü sosyal ortamı kaotikleştiriyordu."
+      }
+    ],
+    "lesson": {
+      "en": "Participants, not customers; rest and rotation by a transparent rule, not by favours.",
+      "tr": "Müşteri değil katılımcı; dinlenme ve rotasyon ricayla değil, şeffaf bir kuralla."
+    }
   },
   {
-    "name": "Kabak",
-    "place": { "en": "Kabak Valley, Fethiye, Muğla", "tr": "Kabak Koyu, Fethiye, Muğla" },
-    "model": { "en": "Small camps in a remote valley, living on seasonal tourism.", "tr": "Uzak bir vadide, mevsimlik turizmle ayakta duran küçük kamplar." }
+    "name": "Ya Basta",
+    "kind": {
+      "en": "Small subculture camp",
+      "tr": "Küçük alt kültür kampı"
+    },
+    "place": {
+      "en": "Kayaköy, Fethiye, Muğla",
+      "tr": "Kayaköy, Fethiye, Muğla"
+    },
+    "image": {
+      "src": "/assets/img/ya-basta.webp",
+      "credit": {
+        "author": "Vano111ru",
+        "license": "CC BY-SA 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Kaya_2.jpg"
+      }
+    },
+    "model": {
+      "en": "A small, isolated camp built around an alternative subculture: no set working hours or clear task descriptions, a slow pace and few people.",
+      "tr": "Alternatif bir alt kültür etrafında kurulmuş küçük ve izole bir kamp: tanımlı mesai ya da net görev tanımı yok, tempo düşük, insan az."
+    },
+    "fails": [
+      {
+        "en": "Decisions stalled with the operator; supplies, insurance and other admin lagged, and the team bore the cost.",
+        "tr": "Karar alma işletmecide tıkanıyordu; tedarik, sigorta gibi idari süreçler aksıyor, bedelini ekip ödüyordu."
+      },
+      {
+        "en": "Little work and isolation made relations among the few people there toxic.",
+        "tr": "Düşük iş yoğunluğu ve izolasyon, az sayıdaki insan arasındaki ilişkileri toksikleştiriyordu."
+      }
+    ],
+    "lesson": {
+      "en": "Professional administration, but decisions by open consent rather than one person's inertia; a steady band of productive work against empty time.",
+      "tr": "İdare profesyonel olmalı ama karar tek bir kişinin ataletine değil açık rızaya dayanmalı; boş zamana karşı sürekli bir üretim bandı."
+    }
+  },
+  {
+    "name": "Nesin Matematik Köyü",
+    "url": "https://matematikkoyu.org",
+    "kind": {
+      "en": "Non-profit education foundation",
+      "tr": "Kâr amacı gütmeyen eğitim vakfı"
+    },
+    "place": {
+      "en": "Şirince, Selçuk, İzmir",
+      "tr": "Şirince, Selçuk, İzmir"
+    },
+    "image": {
+      "src": "/assets/img/matematik-koyu.webp",
+      "credit": {
+        "author": "Raicem",
+        "license": "CC BY-SA 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Nesin_Matematik_K%C3%B6y%C3%BC_Bina.jpg"
+      }
+    },
+    "model": {
+      "en": "An academic, non-profit education foundation and commune built on a culture of imece (shared work). A paid professional core works alongside short-term volunteer and student labour such as dishes and cleaning.",
+      "tr": "Akademik odaklı, imece kültürüne dayanan, kâr amacı gütmeyen bir eğitim vakfı ve komün. Maaşlı profesyonel bir omurga kadro, bulaşık ve temizlik gibi işlerde kısa süreli gönüllü ve öğrenci emeğiyle birlikte çalışıyor."
+    },
+    "works": [
+      {
+        "en": "The customer–servant hierarchy is rejected. Production (learning) sits at the centre, protected by strict cultural rules such as “whoever is studying is not to be disturbed”.",
+        "tr": "Müşteri–hizmetkâr hiyerarşisi reddediliyor. Üretim (eğitim) merkezde ve “ders çalışana dokunulmaz” gibi katı kültürel kurallarla korunuyor."
+      },
+      {
+        "en": "The paid core and short-term volunteer labour fit together well.",
+        "tr": "Maaşlı omurga ile kısa süreli gönüllü emeği başarıyla bütünleşiyor."
+      },
+      {
+        "en": "Outside teachers can join and run their own programmes on a revenue-share basis.",
+        "tr": "Dışarıdan gelen eğitmenler gelir paylaşımıyla sisteme katılıp kendi programlarını yürütebiliyor."
+      }
+    ],
+    "fails": [
+      {
+        "en": "All the value and labour created stays with a central foundation; participants get no ownership, equity or horizontal share of income.",
+        "tr": "Yaratılan tüm değer ve emek merkezi bir vakıf tüzel kişiliğine kalıyor; katılımcılara mülkiyet, hak sahipliği ya da yatay bir gelir dağılımı sunulmuyor."
+      }
+    ],
+    "lesson": {
+      "en": "Keep the culture — participants, protected focus — but give ownership to those who produce instead of to a foundation.",
+      "tr": "Kültürü al — katılımcılık, korunan odak — ama mülkiyeti vakfa değil üretene ver."
+    }
   }
 ]
