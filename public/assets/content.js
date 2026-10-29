@@ -108,7 +108,12 @@
       return withMedia(card, item.image);
     },
     communities: function (item) {
-      var card = el("article", "item");
+      var article = el("article", "feature");
+      if (item.image) {
+        var media = withMedia(el("div"), item.image).querySelector(".media");
+        media.classList.add("feature-media");
+        article.appendChild(media);
+      }
       var title = el("h2");
       if (item.url) {
         var link = el("a", null, item.name);
@@ -119,14 +124,29 @@
       } else {
         title.textContent = item.name;
       }
-      if (item.kind) title.appendChild(el("span", "badge", pick(item.kind)));
-      card.appendChild(title);
-      card.appendChild(el("p", "hint", pick(item.place)));
-      field(card, "model", item.model);
-      points(card, "works", item.works);
-      points(card, "fails", item.fails);
-      field(card, "lesson", item.lesson);
-      return withMedia(card, item.image);
+      article.appendChild(title);
+      var sub = el("p", "feature-sub");
+      if (item.kind) sub.appendChild(el("span", "badge", pick(item.kind)));
+      sub.appendChild(document.createTextNode(pick(item.place)));
+      article.appendChild(sub);
+      if (item.model) {
+        article.appendChild(el("h3", null, label("model")));
+        article.appendChild(el("p", null, pick(item.model)));
+      }
+      ["works", "fails"].forEach(function (key) {
+        if (!item[key] || !item[key].length) return;
+        article.appendChild(el("h3", null, label(key)));
+        var list = el("ul", "list points points-" + key);
+        item[key].forEach(function (value) { list.appendChild(el("li", null, pick(value))); });
+        article.appendChild(list);
+      });
+      if (item.lesson) {
+        var lesson = el("p", "note");
+        lesson.appendChild(el("strong", null, label("lesson") + ": "));
+        lesson.appendChild(document.createTextNode(pick(item.lesson)));
+        article.appendChild(lesson);
+      }
+      return article;
     },
     sources: function (item) {
       var card = el("article", "item source");

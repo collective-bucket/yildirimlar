@@ -143,6 +143,8 @@ p { margin: 0 0 1rem; }
 
 .card.has-media { padding: 0; overflow: hidden; }
 .card-media { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: var(--accent-soft); }
+.card-figure { position: relative; display: block; }
+.card-figure .credit { color: #fff; opacity: .92; text-shadow: 0 1px 2px rgba(0, 0, 0, .55); }
 .card.has-media h3 { padding: .85rem 1.15rem 0; }
 .card.has-media p { padding: 0 1.15rem 1rem; }
 
@@ -163,7 +165,19 @@ p { margin: 0 0 1rem; }
 }
 .principle p { margin: 0; color: var(--muted); font-size: .95rem; }
 
+.banner-slim { aspect-ratio: 40 / 9; }
+.features { display: grid; gap: 2.5rem; }
+.feature + .feature { border-top: 1px solid var(--line); padding-top: 2.5rem; }
+.feature-media { aspect-ratio: 16 / 7; border-radius: var(--radius-lg); margin-bottom: 1.25rem; }
+.feature h2 { margin: 0 0 .35rem; }
+.feature-sub { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; color: var(--muted); font-size: .95rem; margin: 0 0 1rem; }
+.feature-sub .badge { margin: 0; }
+.feature h3 { font-size: 1.05rem; margin: 1.25rem 0 .35rem; }
+.feature .note { margin-top: 1.25rem; }
+
 @media (max-width: 640px) {
+  .banner-slim { aspect-ratio: 16 / 6; }
+  .feature-media { aspect-ratio: 16 / 9; }
   .banner { aspect-ratio: 16 / 8; border-radius: var(--radius); }
   .item.has-media { grid-template-columns: 1fr; }
   .item.has-media .media { aspect-ratio: 16 / 9; }
