@@ -143,8 +143,13 @@ p { margin: 0 0 1rem; }
 
 .card.has-media { padding: 0; overflow: hidden; }
 .card-media { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: var(--accent-soft); }
-.card-figure { position: relative; display: block; }
-.card-figure .credit { color: #fff; opacity: .92; text-shadow: 0 1px 2px rgba(0, 0, 0, .55); }
+.card.has-media { position: relative; }
+.card-figure { position: relative; display: block; margin: 0; }
+.card-figure .credit { z-index: 2; }
+.card-link { display: block; color: inherit; text-decoration: none; }
+.card-link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.card-link:focus-visible { outline: none; }
+.card.has-media:focus-within { border-color: var(--accent-border); box-shadow: 0 0 0 3px var(--accent-soft); }
 .card.has-media h3 { padding: .85rem 1.15rem 0; }
 .card.has-media p { padding: 0 1.15rem 1rem; }
 
