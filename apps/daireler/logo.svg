@@ -1,0 +1,4 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <mask id="cut"><rect width="64" height="64" fill="#fff"/><path d="M2 49 L62 15" stroke="#000" stroke-width="3.2"/></mask>
+  <path d="M46 1 L14 36 H31 L18 63 L52 25 H35 Z" fill="#1b4d39" mask="url(#cut)"/>
+</svg>

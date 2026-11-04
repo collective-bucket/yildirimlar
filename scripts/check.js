@@ -64,3 +64,11 @@ used.forEach(function (key) { assert.ok(i18n.tr[key], "missing tr: " + key); });
 Object.keys(i18n.tr).forEach(function (key) { assert.ok(used.has(key), "unused tr: " + key); });
 
 console.log("check ok: " + html.length + " pages, " + used.size + " i18n keys");
+
+// Test site: apps/daireler (test.yildirimlar.co).
+var daireler = path.join(root, "apps", "daireler");
+childProcess.execFileSync(process.execPath, ["--check", path.join(daireler, "app.js")], { stdio: "inherit" });
+JSON.parse(fs.readFileSync(path.join(daireler, "data", "daireler.json"), "utf8")).forEach(function (d, i) {
+  ["id", "url", "title", "area", "rooms", "listed"].forEach(function (k) { assert.ok(d[k], "daireler[" + i + "]." + k); });
+  ["lat", "lon", "price", "gross", "net", "age"].forEach(function (k) { assert.ok(typeof d[k] === "number", "daireler[" + i + "]." + k + " must be a number"); });
+});
