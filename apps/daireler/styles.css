@@ -178,3 +178,8 @@ dialog.narrow { width: min(24rem, calc(100vw - 1.5rem)); }
 .login-body form { display: grid; gap: .6rem; }
 .login-body label { display: grid; gap: .25rem; font-size: .9rem; }
 .login-body input { font: inherit; border: 1px solid var(--line); border-radius: 6px; padding: .45rem .6rem; }
+
+.pop { display: grid; gap: .3rem; }
+.pop img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: .4rem; margin-bottom: .2rem; }
+.pop span { color: var(--muted, #555); }
+.pop a { font-weight: 600; }

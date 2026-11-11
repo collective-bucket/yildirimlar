@@ -291,7 +291,9 @@
     }).addTo(m);
     var pts = state.all.map(function (d) {
       L.marker([d.lat, d.lon], { icon: L.divIcon({ className: "", html: "<div class=\"pin\">" + d.no + "</div>", iconSize: [28, 28], iconAnchor: [14, 14] }) })
-        .addTo(m).bindPopup("<strong>#" + d.no + " " + esc(d.title) + "</strong><br>" + money(d.price) + " · " + d.rooms);
+        .addTo(m).bindPopup("<div class=\"pop\"><img src=\"/img/" + d.id + ".webp\" alt=\"\" width=\"528\" height=\"396\" loading=\"lazy\">" +
+          "<strong>#" + d.no + " " + esc(d.title) + "</strong><span>" + money(d.price) + " · " + d.rooms + " · " + esc(d.area) + "</span>" +
+          (d.url ? "<a href=\"" + esc(d.url) + "\" target=\"_blank\" rel=\"noopener\">İlan ↗</a>" : "") + "</div>", { maxWidth: 240, minWidth: 220 });
       return [d.lat, d.lon];
     });
     L.circleMarker(CENTER, { radius: 5, color: "#52615a", weight: 2, fillOpacity: .6 }).addTo(m).bindTooltip("Fethiye merkez");
