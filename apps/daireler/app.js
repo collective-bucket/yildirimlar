@@ -63,8 +63,9 @@
   }
 
   function videos(d) {
-    return [].concat(d.videos || []).map(function (v) {
-      var id = ytId(v); return id && { id: id, vertical: /shorts\//.test(v) };
+    return [].concat(d.videos || []).map(function (v, i) {
+      var url = typeof v === "string" ? v : v.url, id = ytId(url);
+      return id && { id: id, vertical: /shorts\//.test(url), label: (v && v.label) || String(i + 1) };
     }).filter(Boolean);
   }
 
@@ -74,7 +75,7 @@
     $("videoFrame").innerHTML = "<iframe src=\"https://www.youtube-nocookie.com/embed/" + v.id +
       "?autoplay=1&rel=0&playsinline=1\" title=\"Daire videosu " + (i + 1) + "\" allow=\"autoplay; encrypted-media; picture-in-picture; fullscreen\" allowfullscreen></iframe>";
     $("videoNav").innerHTML = list.length < 2 ? "" : list.map(function (x, j) {
-      return "<button type=\"button\" data-vi=\"" + j + "\" aria-pressed=\"" + (i === j) + "\">" + (j + 1) + "</button>";
+      return "<button type=\"button\" data-vi=\"" + j + "\" aria-pressed=\"" + (i === j) + "\">" + esc(x.label) + "</button>";
     }).join("");
   }
 

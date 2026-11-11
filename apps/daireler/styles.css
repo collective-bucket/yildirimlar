@@ -164,7 +164,7 @@ dialog .fine { padding: 0 1.1rem 1rem; }
 .auth { display: inline-flex; gap: .6rem; align-items: center; }
 .top { flex-wrap: wrap; }
 .auth .fine { margin: 0; }
-dialog.video { width: auto; max-width: min(60rem, calc(100vw - 1.5rem)); }
+dialog.video { width: fit-content; max-width: min(60rem, calc(100vw - 1.5rem)); }
 dialog.narrow { width: min(24rem, calc(100vw - 1.5rem)); }
 .video-frame { width: min(60rem, calc(100vw - 1.5rem)); aspect-ratio: 16 / 9; background: #000; }
 .video-frame.vertical { width: auto; height: min(72dvh, 44rem); aspect-ratio: 9 / 16; margin: 0 auto; }
