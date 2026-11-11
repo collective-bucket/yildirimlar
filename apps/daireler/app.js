@@ -99,10 +99,10 @@
       return "<a class=\"" + cls + "\" href=\"" + tel(p.number) + "\">" + esc(p.type) + " " + esc(p.number) + "</a>";
     }).join("");
   }
-  function contactBox(c, cls) {
+  function contactBox(c, cls, extra) {
     return "<details class=\"contact" + (cls ? " " + cls : "") + "\"><summary>İletişim</summary><div class=\"contact-body\"><strong>" + esc(c.office) + "</strong>" +
       "<span>" + esc(c.agent) + (c.license ? " · Yetki belge no " + esc(c.license) : "") + "</span>" +
-      "<div class=\"phones\">" + phoneLinks(c, "call") + "</div></div></details>";
+      "<div class=\"phones\">" + phoneLinks(c, "call") + "</div>" + (extra || "") + "</div></details>";
   }
   function gross(d) { return d.gross == null ? "?" : d.gross; }
   function eh(v) { return v == null ? "Belirtilmemiş" : v ? "Evet" : "Hayır"; }
@@ -332,8 +332,7 @@
       L.marker([d.lat, d.lon], { icon: L.divIcon({ className: "", html: "<div class=\"pin\">" + d.no + "</div>", iconSize: [28, 28], iconAnchor: [14, 14] }) })
         .addTo(m).bindPopup("<div class=\"pop\"><img src=\"/img/" + d.id + ".webp\" alt=\"\" width=\"528\" height=\"396\" loading=\"lazy\">" +
           "<strong>#" + d.no + " " + esc(d.title) + "</strong><span>" + money(d.price) + " · " + d.rooms + " · " + esc(d.area) + "</span>" +
-          (d.contact ? contactBox(d.contact, "flat") : "") +
-          (d.url ? "<a href=\"" + esc(d.url) + "\" target=\"_blank\" rel=\"noopener\">İlan ↗</a>" : "") + "</div>",
+          (function (link) { return d.contact ? contactBox(d.contact, "bare", link) : link; })(d.url ? "<a class=\"pop-link\" href=\"" + esc(d.url) + "\" target=\"_blank\" rel=\"noopener\">İlan ↗</a>" : "") + "</div>",
           { maxWidth: 240, minWidth: 180, keepInView: true, autoPanPaddingTopLeft: [10, 10], autoPanPaddingBottomRight: [10, 10] });
       return [d.lat, d.lon];
     });

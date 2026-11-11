@@ -201,6 +201,10 @@ dialog.narrow { width: min(24rem, calc(100vw - 1.5rem)); }
 .contact.flat { margin: .3rem 0 0; background: none; }
 .contact.flat summary { padding: .35rem .6rem; }
 .contact.flat .contact-body { padding: 0 .6rem .55rem; }
+.contact.bare { margin: 0; border: 0; border-radius: 0; background: none; }
+.contact.bare summary { padding: .15rem 0; }
+.contact.bare .contact-body { padding: .2rem 0 0; }
+.contact-body .pop-link { margin-top: .45rem; }
 .phones { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .4rem; }
 .call { display: inline-flex; align-items: center; padding: .3rem .65rem; border-radius: 999px; border: 1px solid var(--line); background: #fff; font-size: .84rem; text-decoration: none; white-space: nowrap; }
 .call:hover { border-color: var(--accent); }
