@@ -13,6 +13,7 @@
 <header class="top">
   <a class="brand" href="/"><img src="/logo.svg" alt="" width="22" height="22">Fethiye daireleri</a>
   <span class="count" id="count"></span>
+  <span class="auth"><span class="fine" id="authInfo"></span><button type="button" class="ghost" id="authBtn">Giriş</button></span>
 </header>
 
 <main>
@@ -70,9 +71,35 @@
   <p class="fine"><span class="better-dot"></span> daha iyi değer · kalın satırlar iki dairede farklı olanlar</p>
 </dialog>
 
-<footer class="foot">Bilgiler sahibinden.com ilanlarından derlendi (Kasım 2026). Kişisel kıyas aracı; notların ve puanların yalnızca bu tarayıcıda saklanır.</footer>
+<dialog id="video" class="wide" aria-labelledby="videoTitle">
+  <div class="dialog-head">
+    <h2 id="videoTitle">Video</h2>
+    <button type="button" class="ghost" id="videoClose" aria-label="Kapat">✕</button>
+  </div>
+  <div class="video-frame" id="videoFrame"></div>
+</dialog>
+
+<dialog id="login" class="narrow" aria-labelledby="loginTitle">
+  <div class="dialog-head">
+    <h2 id="loginTitle">Not yazmak için giriş</h2>
+    <button type="button" class="ghost" id="loginClose" aria-label="Kapat">✕</button>
+  </div>
+  <div class="login-body">
+    <button type="button" class="primary" id="loginGoogle">Google ile giriş</button>
+    <form id="loginForm">
+      <label>E-posta <input name="email" type="email" autocomplete="email" required></label>
+      <label>Şifre <input name="password" type="password" autocomplete="current-password" required></label>
+      <button type="submit" class="ghost">E-posta ile giriş</button>
+    </form>
+    <p class="fine" id="authError" role="alert"></p>
+  </div>
+</dialog>
+
+<footer class="foot">Bilgiler sahibinden.com ilanlarından derlendi (Kasım 2026). Fotoğraflar ilanlardan alındı. Notları ve puanları herkes görür, yalnızca site sahibi yazabilir.</footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="/config.js"></script>
 <script src="/app.js"></script>
+<script type="module" src="/auth.js"></script>
 </body>
 </html>

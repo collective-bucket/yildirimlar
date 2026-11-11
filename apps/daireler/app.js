@@ -2,14 +2,70 @@
   "use strict";
 
   var CENTER = [36.6216, 29.1164];
-  var STORE = "daireler-mine";
+  var LEGACY = "daireler-mine";
+  var ADMIN = "admin@collectivebucket.com";
+  var NOTES = "https://firestore.googleapis.com/v1/projects/collective-bucket/databases/(default)/documents/apps/yildirimlar/daireler";
   var tl = new Intl.NumberFormat("tr-TR");
-  var state = { all: [], sort: "price", rooms: "all", view: "cards", picked: [], mine: load() };
+  var state = { all: [], sort: "price", rooms: "all", view: "cards", picked: [], notes: {}, editor: false };
+  var timers = {};
   var $ = function (id) { return document.getElementById(id); };
 
-  function load() { try { return JSON.parse(localStorage.getItem(STORE)) || {}; } catch (e) { return {}; } }
-  function save() { try { localStorage.setItem(STORE, JSON.stringify(state.mine)); } catch (e) { /* private mode */ } }
-  function mine(id) { return state.mine[id] || (state.mine[id] = { stars: 0, note: "" }); }
+  function mine(id) { return state.notes[id] || (state.notes[id] = { stars: 0, note: "" }); }
+
+  function loadNotes() {
+    return fetch(NOTES + "?pageSize=300").then(function (r) { return r.ok ? r.json() : {}; }).then(function (body) {
+      (body.documents || []).forEach(function (doc) {
+        var f = doc.fields || {};
+        state.notes[doc.name.split("/").pop()] = {
+          note: f.note ? f.note.stringValue : "",
+          stars: f.stars ? Number(f.stars.integerValue) : 0
+        };
+      });
+    }).catch(function () { /* notes are optional */ });
+  }
+
+  function status(id, text) {
+    var el = document.querySelector(".card[data-id=\"" + id + "\"] .save-state");
+    if (el) el.textContent = text;
+  }
+
+  function save(id) {
+    clearTimeout(timers[id]);
+    status(id, "Kaydediliyor…");
+    timers[id] = setTimeout(function () {
+      var m = mine(id);
+      window.DairelerAuth.token().then(function (token) {
+        return fetch(NOTES + "/" + id + "?updateMask.fieldPaths=note&updateMask.fieldPaths=stars&updateMask.fieldPaths=updatedAt", {
+          method: "PATCH",
+          headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" },
+          body: JSON.stringify({ fields: {
+            note: { stringValue: m.note.slice(0, 4000) },
+            stars: { integerValue: String(m.stars) },
+            updatedAt: { timestampValue: new Date().toISOString() }
+          } })
+        });
+      }).then(function (r) {
+        status(id, r.ok ? "Kaydedildi · herkes görür" : "Kaydedilemedi (" + r.status + ")");
+      }).catch(function () { status(id, "Kaydedilemedi"); });
+    }, 700);
+  }
+
+  // Notes kept in this browser before they became shared.
+  function migrate() {
+    var old;
+    try { old = JSON.parse(localStorage.getItem(LEGACY)) || {}; } catch (e) { return; }
+    Object.keys(old).forEach(function (id) {
+      var o = old[id], m = mine(id);
+      if (!byId(id) || (!o.note && !o.stars) || m.note || m.stars) return;
+      m.note = o.note || ""; m.stars = o.stars || 0; save(id);
+    });
+    try { localStorage.removeItem(LEGACY); } catch (e) { /* private mode */ }
+  }
+
+  function ytId(v) {
+    var m = /(?:youtu\.be\/|[?&]v=|shorts\/|embed\/|live\/)([\w-]{11})/.exec(v || "") || /^([\w-]{11})$/.exec(v || "");
+    return m && m[1];
+  }
 
   function km(a, b) {
     var r = Math.PI / 180, dLat = (b[0] - a[0]) * r, dLon = (b[1] - a[1]) * r;
@@ -75,9 +131,23 @@
       ["Site içi", d.site], ["Havuz", d.pool], ["Eşyalı", d.furnished], ["Turizm belgesi", d.tourism], ["Krediye uygun", d.loan]
     ].map(function (c) { return "<li class=\"" + (c[1] ? "yes" : "") + "\">" + (c[1] == null ? "? " : c[1] ? "✓ " : "✗ ") + c[0] + "</li>"; }).join("");
     var stars = [1, 2, 3, 4, 5].map(function (n) {
-      return "<button type=\"button\" data-star=\"" + n + "\" class=\"" + (n <= m.stars ? "on" : "") + "\" aria-label=\"" + n + " yıldız\">★</button>";
+      return state.editor
+        ? "<button type=\"button\" data-star=\"" + n + "\" class=\"" + (n <= m.stars ? "on" : "") + "\" aria-label=\"" + n + " yıldız\">★</button>"
+        : "<span class=\"" + (n <= m.stars ? "on" : "") + "\" aria-hidden=\"true\">★</span>";
     }).join("");
-    return "<article class=\"card" + (picked ? " picked" : "") + "\" data-id=\"" + d.id + "\">" +
+    var notes = state.editor
+      ? "<div class=\"mine\"><div class=\"stars\" role=\"group\" aria-label=\"Puan\">" + stars + "</div>" +
+        "<textarea data-note maxlength=\"4000\" placeholder=\"Not (gezdim, sorular, izlenim…) · herkes görür\" aria-label=\"Not\">" + esc(m.note) + "</textarea>" +
+        "<div class=\"save-state\" aria-live=\"polite\"></div></div>"
+      : (m.note || m.stars
+        ? "<div class=\"mine\"><div class=\"stars static\" role=\"img\" aria-label=\"Puan " + m.stars + "/5\">" + stars + "</div>" +
+          (m.note ? "<p class=\"note-view\">" + esc(m.note) + "</p>" : "") + "</div>"
+        : "");
+    var vid = ytId(d.video);
+    var photo = "<div class=\"photo\"><img src=\"/img/" + d.id + ".webp\" alt=\"" + esc(d.title) + "\" width=\"528\" height=\"396\" loading=\"lazy\">" +
+      (d.aiPhoto ? "<span class=\"tag\">İlan görselleri yapay zekâ ile üretilmiş</span>" : "") +
+      (vid ? "<button type=\"button\" class=\"play\" data-video=\"" + vid + "\" aria-label=\"Videoyu izle\">▶ Video</button>" : "") + "</div>";
+    return "<article class=\"card" + (picked ? " picked" : "") + "\" data-id=\"" + d.id + "\">" + photo +
       "<div class=\"card-head\"><span class=\"no\">#" + d.no + "</span>" +
       "<div class=\"price\">" + money(d.price) + "</div>" +
       "<div class=\"ppm\">" + money(d.ppm) + " / net m²</div>" +
@@ -93,8 +163,7 @@
       "<dt>İlan tarihi</dt><dd>" + date(d.listed) + "</dd>" +
       "</dl>" +
       (d.warnings && d.warnings.length ? "<div class=\"warn\"><strong>Dikkat</strong><ul>" + d.warnings.map(function (w) { return "<li>" + esc(w) + "</li>"; }).join("") + "</ul></div>" : "") +
-      "<div class=\"mine\"><div class=\"stars\" role=\"group\" aria-label=\"Puanım\">" + stars + "</div>" +
-      "<textarea data-note placeholder=\"Notum (gezdim, sorular, izlenim…)\" aria-label=\"Notum\">" + esc(m.note) + "</textarea></div>" +
+      notes +
       "<div class=\"card-actions\">" +
       "<label class=\"pick\"><input type=\"checkbox\" data-pick" + (picked ? " checked" : "") + "> Kıyasla</label>" +
       "<a class=\"link\" href=\"https://www.google.com/maps?q=" + d.lat + "," + d.lon + "\" target=\"_blank\" rel=\"noopener\">Harita ↗</a>" +
@@ -110,7 +179,10 @@
 
   var COLS = [
     { k: "#", s: null, v: function (d) { return d.no; } },
-    { k: "Daire", s: null, v: function (d) { return "<a href=\"" + esc(d.url) + "\" target=\"_blank\" rel=\"noopener\">" + esc(d.title) + "</a><div class=\"fine\">" + esc(d.area) + "</div>"; } },
+    { k: "Daire", s: null, v: function (d) {
+      return "<div class=\"row-flat\"><img class=\"thumb\" src=\"/img/" + d.id + ".webp\" alt=\"\" width=\"80\" height=\"60\" loading=\"lazy\">" +
+        "<div><a href=\"" + esc(d.url) + "\" target=\"_blank\" rel=\"noopener\">" + esc(d.title) + "</a><div class=\"fine\">" + esc(d.area) + "</div></div></div>";
+    } },
     { k: "Fiyat", s: "price", n: 1, v: function (d) { return money(d.price); } },
     { k: "₺/m²", s: "ppm", n: 1, v: function (d) { return money(d.ppm); } },
     { k: "Oda", s: null, v: function (d) { return d.rooms; } },
@@ -176,7 +248,7 @@
   function openCompare() {
     var p = state.picked.map(byId);
     if (p.length < 2) return;
-    var html = "<thead><tr><th></th>" + p.map(function (d) { return "<th>#" + d.no + " " + esc(d.title) + "</th>"; }).join("") + "</tr></thead><tbody>";
+    var html = "<thead><tr><th></th>" + p.map(function (d) { return "<th><img src=\"/img/" + d.id + ".webp\" alt=\"\" width=\"528\" height=\"396\">#" + d.no + " " + esc(d.title) + "</th>"; }).join("") + "</tr></thead><tbody>";
     ROWS.forEach(function (r) {
       var vals = p.map(r.get), diff = vals[0] !== vals[1], best = -1;
       if (r.better && diff) {
@@ -240,14 +312,39 @@
     $("slider").addEventListener("click", function (e) {
       var b = e.target.closest("[data-star]"); if (!b) return;
       var id = b.closest(".card").dataset.id, m = mine(id), n = Number(b.dataset.star);
-      m.stars = m.stars === n ? 0 : n; save();
+      m.stars = m.stars === n ? 0 : n; save(id);
       b.parentNode.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", Number(x.dataset.star) <= m.stars); });
       renderTable(visible());
     });
     $("slider").addEventListener("input", function (e) {
       if (!e.target.matches("[data-note]")) return;
-      mine(e.target.closest(".card").dataset.id).note = e.target.value; save();
+      var id = e.target.closest(".card").dataset.id;
+      mine(id).note = e.target.value; save(id);
     });
+    $("slider").addEventListener("click", function (e) {
+      var b = e.target.closest("[data-video]"); if (!b) return;
+      $("videoFrame").innerHTML = "<iframe src=\"https://www.youtube-nocookie.com/embed/" + b.dataset.video +
+        "?autoplay=1&rel=0\" title=\"Daire videosu\" allow=\"autoplay; encrypted-media; picture-in-picture; fullscreen\" allowfullscreen></iframe>";
+      $("video").showModal();
+    });
+    $("videoClose").addEventListener("click", function () { $("video").close(); });
+    $("video").addEventListener("click", function (e) { if (e.target === this) this.close(); });
+    $("video").addEventListener("close", function () { $("videoFrame").innerHTML = ""; });
+    $("authBtn").addEventListener("click", function () {
+      if (window.DairelerAuth && window.DairelerAuth.user) { window.DairelerAuth.signOut(); return; }
+      $("authError").textContent = ""; $("login").showModal();
+    });
+    $("loginClose").addEventListener("click", function () { $("login").close(); });
+    $("loginGoogle").addEventListener("click", function () {
+      window.DairelerAuth.google().then(function () { if (window.DairelerAuth.user) $("login").close(); })
+        .catch(function (err) { $("authError").textContent = "Giriş yapılamadı (" + (err.code || err.message) + ")."; });
+    });
+    $("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      window.DairelerAuth.signIn(this.email.value.trim(), this.password.value).then(function () { $("login").close(); })
+        .catch(function (err) { $("authError").textContent = "Giriş yapılamadı (" + (err.code || err.message) + ")."; });
+    });
+    window.addEventListener("daireler-auth", function () { onAuth(); });
     $("overview").addEventListener("click", function (e) {
       var th = e.target.closest("th[data-sort]"); if (!th) return;
       state.sort = th.dataset.sort; $("sort").value = state.sort; render();
@@ -258,7 +355,19 @@
     $("compare").addEventListener("click", function (e) { if (e.target === this) this.close(); });
   }
 
-  fetch("/data/daireler.json").then(function (r) { return r.json(); }).then(function (rows) {
+  function onAuth() {
+    var u = window.DairelerAuth && window.DairelerAuth.user;
+    var editor = !!(u && u.verified && u.email === ADMIN);
+    $("authBtn").textContent = u ? "Çıkış" : "Giriş";
+    $("authInfo").textContent = u ? (editor ? "Notları düzenliyorsun" : u.email + " not yazamaz") : "";
+    if (editor === state.editor) return;
+    state.editor = editor;
+    if (editor) migrate();
+    if (state.all.length) render();
+  }
+
+  Promise.all([fetch("/data/daireler.json"), loadNotes()])
+    .then(function (res) { return res[0].json(); }).then(function (rows) {
     state.all = rows.map(function (d, i) {
       d.no = i + 1; d.ppm = Math.round(d.price / d.net); d.dist = km(CENTER, [d.lat, d.lon]); return d;
     });
@@ -266,6 +375,6 @@
     $("rooms").innerHTML = rooms.map(function (r) {
       return "<button type=\"button\" data-rooms=\"" + r + "\" aria-pressed=\"" + (r === "all") + "\">" + (r === "all" ? "Tümü" : r) + "</button>";
     }).join("");
-    bind(); render(); map();
+    bind(); onAuth(); render(); map();
   }).catch(function () { $("slider").textContent = "Veri yüklenemedi."; });
 })();
