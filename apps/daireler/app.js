@@ -62,6 +62,22 @@
     try { localStorage.removeItem(LEGACY); } catch (e) { /* private mode */ }
   }
 
+  function videos(d) {
+    return [].concat(d.videos || []).map(function (v) {
+      var id = ytId(v); return id && { id: id, vertical: /shorts\//.test(v) };
+    }).filter(Boolean);
+  }
+
+  function showVideo(list, i) {
+    var v = list[i];
+    $("videoFrame").className = "video-frame" + (v.vertical ? " vertical" : "");
+    $("videoFrame").innerHTML = "<iframe src=\"https://www.youtube-nocookie.com/embed/" + v.id +
+      "?autoplay=1&rel=0&playsinline=1\" title=\"Daire videosu " + (i + 1) + "\" allow=\"autoplay; encrypted-media; picture-in-picture; fullscreen\" allowfullscreen></iframe>";
+    $("videoNav").innerHTML = list.length < 2 ? "" : list.map(function (x, j) {
+      return "<button type=\"button\" data-vi=\"" + j + "\" aria-pressed=\"" + (i === j) + "\">" + (j + 1) + "</button>";
+    }).join("");
+  }
+
   function ytId(v) {
     var m = /(?:youtu\.be\/|[?&]v=|shorts\/|embed\/|live\/)([\w-]{11})/.exec(v || "") || /^([\w-]{11})$/.exec(v || "");
     return m && m[1];
@@ -145,10 +161,10 @@
         ? "<div class=\"mine\"><div class=\"stars static\" role=\"img\" aria-label=\"Puan " + m.stars + "/5\">" + stars + "</div>" +
           (m.note ? "<p class=\"note-view\">" + esc(m.note) + "</p>" : "") + "</div>"
         : "");
-    var vid = ytId(d.video);
+    var vids = videos(d);
     var photo = "<div class=\"photo\"><img src=\"/img/" + d.id + ".webp\" alt=\"" + esc(d.title) + "\" width=\"528\" height=\"396\" loading=\"lazy\">" +
       (d.aiPhoto ? "<span class=\"tag\">İlan görselleri yapay zekâ ile üretilmiş</span>" : "") +
-      (vid ? "<button type=\"button\" class=\"play\" data-video=\"" + vid + "\" aria-label=\"Videoyu izle\">▶ Video</button>" : "") + "</div>";
+      (vids.length ? "<button type=\"button\" class=\"play\" data-videos=\"" + esc(JSON.stringify(vids)) + "\" aria-label=\"Videoları izle\">▶ Video" + (vids.length > 1 ? " (" + vids.length + ")" : "") + "</button>" : "") + "</div>";
     return "<article class=\"card" + (picked ? " picked" : "") + "\" data-id=\"" + d.id + "\">" + photo +
       "<div class=\"card-head\"><span class=\"no\">#" + d.no + "</span>" +
       "<div class=\"price\">" + money(d.price) + "</div>" +
@@ -324,10 +340,15 @@
       mine(id).note = e.target.value; save(id);
     });
     $("slider").addEventListener("click", function (e) {
-      var b = e.target.closest("[data-video]"); if (!b) return;
-      $("videoFrame").innerHTML = "<iframe src=\"https://www.youtube-nocookie.com/embed/" + b.dataset.video +
-        "?autoplay=1&rel=0\" title=\"Daire videosu\" allow=\"autoplay; encrypted-media; picture-in-picture; fullscreen\" allowfullscreen></iframe>";
+      var b = e.target.closest("[data-videos]"); if (!b) return;
+      var d = byId(b.closest(".card").dataset.id);
+      state.videos = JSON.parse(b.dataset.videos);
+      $("videoTitle").textContent = "#" + d.no + " " + d.title;
+      showVideo(state.videos, 0);
       $("video").showModal();
+    });
+    $("videoNav").addEventListener("click", function (e) {
+      var b = e.target.closest("[data-vi]"); if (b) showVideo(state.videos, Number(b.dataset.vi));
     });
     $("videoClose").addEventListener("click", function () { $("video").close(); });
     $("video").addEventListener("click", function (e) { if (e.target === this) this.close(); });
