@@ -99,6 +99,12 @@
       return "<a class=\"" + cls + "\" href=\"" + tel(p.number) + "\">" + esc(p.type) + " " + esc(p.number) + "</a>";
     }).join("");
   }
+  // DOM node, not a string: popup.update() then keeps the <details> open state.
+  function popEl(html) {
+    var el = document.createElement("div");
+    el.innerHTML = html;
+    return el.firstChild;
+  }
   function contactBox(c, cls, extra) {
     return "<details class=\"contact" + (cls ? " " + cls : "") + "\"><summary>İletişim</summary><div class=\"contact-body\"><strong>" + esc(c.office) + "</strong>" +
       "<span>" + esc(c.agent) + (c.license ? " · Yetki belge no " + esc(c.license) : "") + "</span>" +
@@ -193,8 +199,8 @@
       "<dt>İlan tarihi</dt><dd>" + date(d.listed) + "</dd>" +
       "</dl>" +
       (d.warnings && d.warnings.length ? "<div class=\"warn\"><strong>Dikkat</strong><ul>" + d.warnings.map(function (w) { return "<li>" + esc(w) + "</li>"; }).join("") + "</ul></div>" : "") +
-      notes +
       (d.contact ? contactBox(d.contact) : "<div class=\"contact none\">İletişim bilgisi yok</div>") +
+      notes +
       "<div class=\"card-actions\">" +
       "<label class=\"pick\"><input type=\"checkbox\" data-pick" + (picked ? " checked" : "") + "> Kıyasla</label>" +
       "<a class=\"link\" href=\"https://www.google.com/maps?q=" + d.lat + "," + d.lon + "\" target=\"_blank\" rel=\"noopener\">Harita ↗</a>" +
@@ -330,9 +336,9 @@
     }).addTo(m);
     var pts = state.all.map(function (d) {
       L.marker([d.lat, d.lon], { icon: L.divIcon({ className: "", html: "<div class=\"pin\">" + d.no + "</div>", iconSize: [28, 28], iconAnchor: [14, 14] }) })
-        .addTo(m).bindPopup("<div class=\"pop\"><img src=\"/img/" + d.id + ".webp\" alt=\"\" width=\"528\" height=\"396\" loading=\"lazy\">" +
+        .addTo(m).bindPopup(popEl("<div class=\"pop\"><img src=\"/img/" + d.id + ".webp\" alt=\"\" width=\"528\" height=\"396\" loading=\"lazy\">" +
           "<strong>#" + d.no + " " + esc(d.title) + "</strong><span>" + money(d.price) + " · " + d.rooms + " · " + esc(d.area) + "</span>" +
-          (function (link) { return d.contact ? contactBox(d.contact, "bare", link) : link; })(d.url ? "<a class=\"pop-link\" href=\"" + esc(d.url) + "\" target=\"_blank\" rel=\"noopener\">İlan ↗</a>" : "") + "</div>",
+          (function (link) { return d.contact ? contactBox(d.contact, "bare", link) : link; })(d.url ? "<a class=\"call pop-link\" href=\"" + esc(d.url) + "\" target=\"_blank\" rel=\"noopener\">İlanı gör</a>" : "") + "</div>"),
           { maxWidth: 240, minWidth: 180, keepInView: true, autoPanPaddingTopLeft: [10, 10], autoPanPaddingBottomRight: [10, 10] });
       return [d.lat, d.lon];
     });
