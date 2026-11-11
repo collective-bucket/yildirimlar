@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Daireler</title>
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="/"><img src="/logo.svg" alt="" width="22" height="22">Daireler</a>
+  <span class="count" id="count"></span>
+  <span class="auth"><span class="fine" id="authInfo"></span><button type="button" class="ghost" id="authBtn">Giriş</button></span>
+</header>
+
+<main>
+  <div class="toolbar">
+    <label>Sırala
+      <select id="sort">
+        <option value="price">Fiyat (düşük → yüksek)</option>
+        <option value="ppm">₺/m² net (düşük → yüksek)</option>
+        <option value="net">Net m² (büyük → küçük)</option>
+        <option value="age">Bina yaşı (yeni → eski)</option>
+        <option value="dist">Merkeze uzaklık (yakın → uzak)</option>
+        <option value="listed">İlan tarihi (yeni → eski)</option>
+        <option value="stars">Puanım (yüksek → düşük)</option>
+      </select>
+    </label>
+    <div class="seg" id="rooms" role="group" aria-label="Oda"></div>
+    <div class="seg" role="group" aria-label="Görünüm">
+      <button type="button" data-view="cards" aria-pressed="true">Kartlar</button>
+      <button type="button" data-view="table" aria-pressed="false">Tablo</button>
+    </div>
+  </div>
+
+  <section id="cardsView">
+    <div class="slider-nav">
+      <button type="button" class="arrow" id="prev" aria-label="Önceki">←</button>
+      <span id="pos" aria-live="polite"></span>
+      <button type="button" class="arrow" id="next" aria-label="Sonraki">→</button>
+    </div>
+    <div class="slider" id="slider" tabindex="0" aria-label="Daireler"></div>
+  </section>
+
+  <section id="tableView" hidden>
+    <div class="table-wrap"><table class="overview" id="overview"></table></div>
+  </section>
+
+  <section class="map-wrap">
+    <h2>Konumlar</h2>
+    <div id="map" role="img" aria-label="Dairelerin haritası"></div>
+    <p class="fine">Mesafeler Fethiye merkezine (belediye) kuş uçuşu. Konumlar ilanlardaki pinden alındı ve yaklaşık olabilir.</p>
+  </section>
+</main>
+
+<div class="compare-bar" id="compareBar" hidden>
+  <span id="compareInfo"></span>
+  <button type="button" class="ghost" id="compareClear">Temizle</button>
+  <button type="button" class="primary" id="compareOpen">Yan yana kıyasla</button>
+</div>
+
+<dialog id="compare" aria-labelledby="compareTitle">
+  <div class="dialog-head">
+    <h2 id="compareTitle">Yan yana</h2>
+    <button type="button" class="ghost" id="compareClose" aria-label="Kapat">✕</button>
+  </div>
+  <div class="table-wrap"><table class="cmp" id="cmpTable"></table></div>
+  <p class="fine"><span class="better-dot"></span> daha iyi değer · kalın satırlar iki dairede farklı olanlar</p>
+</dialog>
+
+<dialog id="video" class="video" aria-labelledby="videoTitle">
+  <div class="dialog-head">
+    <h2 id="videoTitle">Video</h2>
+    <button type="button" class="ghost" id="videoClose" aria-label="Kapat">✕</button>
+  </div>
+  <div class="video-frame" id="videoFrame"></div>
+  <div class="video-nav" id="videoNav" role="group" aria-label="Videolar"></div>
+</dialog>
+
+<dialog id="login" class="narrow" aria-labelledby="loginTitle">
+  <div class="dialog-head">
+    <h2 id="loginTitle">Not yazmak için giriş</h2>
+    <button type="button" class="ghost" id="loginClose" aria-label="Kapat">✕</button>
+  </div>
+  <div class="login-body">
+    <button type="button" class="primary" id="loginGoogle">Google ile giriş</button>
+    <form id="loginForm">
+      <label>E-posta <input name="email" type="email" autocomplete="email" required></label>
+      <label>Şifre <input name="password" type="password" autocomplete="current-password" required></label>
+      <button type="submit" class="ghost">E-posta ile giriş</button>
+    </form>
+    <p class="fine" id="authError" role="alert"></p>
+  </div>
+</dialog>
+
+<footer class="foot">Bilgiler sahibinden.com ilanlarından derlendi (Kasım 2026). Fotoğraflar ilanlardan alındı. Notları ve puanları herkes görür, yalnızca site sahibi yazabilir.</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="/config.js"></script>
+<script src="/app.js"></script>
+<script type="module" src="/auth.js"></script>
+</body>
+</html>
