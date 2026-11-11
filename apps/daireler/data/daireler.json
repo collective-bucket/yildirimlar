@@ -419,5 +419,44 @@
       "Bina 21–25 yaşında; yapı durumunu sor.",
       "Otopark yok."
     ]
+  },
+  {
+    "id": "20261111",
+    "url": null,
+    "title": "İnşaat hâlinde 1+1 bahçe katı, Pazaryeri",
+    "area": "Pazaryeri",
+    "lat": 36.627757,
+    "lon": 29.14336,
+    "price": 5500000,
+    "gross": null,
+    "net": 62,
+    "rooms": "1+1",
+    "age": 0,
+    "ageLabel": "İnşaat",
+    "floor": "Bahçe katı",
+    "floors": 3,
+    "dues": null,
+    "site": false,
+    "pool": false,
+    "furnished": false,
+    "loan": true,
+    "deed": null,
+    "tourism": false,
+    "swap": null,
+    "elevator": null,
+    "parking": "Yok",
+    "heating": null,
+    "bathrooms": null,
+    "view": [
+      "Şehir"
+    ],
+    "facade": [],
+    "extras": [],
+    "listed": "2026-11-11",
+    "warnings": [
+      "Yapım aşamasında, teslim Mart 2027.",
+      "Otopark yok.",
+      "Aidat belirtilmemiş."
+    ]
   }
 ]

@@ -70,7 +70,8 @@ var daireler = path.join(root, "apps", "daireler");
 childProcess.execFileSync(process.execPath, ["--check", path.join(daireler, "app.js")], { stdio: "inherit" });
 childProcess.execFileSync(process.execPath, ["--check", path.join(daireler, "auth.js")], { stdio: "inherit" });
 JSON.parse(fs.readFileSync(path.join(daireler, "data", "daireler.json"), "utf8")).forEach(function (d, i) {
-  ["id", "url", "title", "area", "rooms", "listed"].forEach(function (k) { assert.ok(d[k], "daireler[" + i + "]." + k); });
+  ["id", "title", "area", "rooms", "listed"].forEach(function (k) { assert.ok(d[k], "daireler[" + i + "]." + k); });
   assert.ok(fs.existsSync(path.join(daireler, "img", d.id + ".webp")), "daireler[" + i + "]: missing img/" + d.id + ".webp");
-  ["lat", "lon", "price", "gross", "net", "age"].forEach(function (k) { assert.ok(typeof d[k] === "number", "daireler[" + i + "]." + k + " must be a number"); });
+  ["lat", "lon", "price", "net", "age"].forEach(function (k) { assert.ok(typeof d[k] === "number", "daireler[" + i + "]." + k + " must be a number"); });
+  assert.ok(d.gross === null || typeof d.gross === "number", "daireler[" + i + "].gross must be a number or null");
 });

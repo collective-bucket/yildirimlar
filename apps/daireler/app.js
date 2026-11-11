@@ -74,7 +74,9 @@
   }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]; }); }
   function money(n) { return tl.format(n) + " ₺"; }
-  function yn(v) { return v ? "Var" : "Yok"; }
+  function yn(v) { return v == null ? "Belirtilmemiş" : v ? "Var" : "Yok"; }
+  function nk(v) { return v == null || v === "" ? "Belirtilmemiş" : v; }
+  function gross(d) { return d.gross == null ? "?" : d.gross; }
   function eh(v) { return v == null ? "Belirtilmemiş" : v ? "Evet" : "Hayır"; }
   function date(s) { return new Date(s + "T00:00:00").toLocaleDateString("tr-TR", { day: "numeric", month: "short", year: "numeric" }); }
   function list(a) { return a && a.length ? a.join(", ") : "—"; }
@@ -83,8 +85,8 @@
   var ROWS = [
     { k: "Fiyat", get: function (d) { return money(d.price); }, num: function (d) { return d.price; }, better: "low" },
     { k: "₺/m² (net)", get: function (d) { return money(d.ppm); }, num: function (d) { return d.ppm; }, better: "low" },
-    { k: "₺/m² (brüt)", get: function (d) { return money(Math.round(d.price / d.gross)); }, num: function (d) { return d.price / d.gross; }, better: "low" },
-    { k: "Net / brüt m²", get: function (d) { return d.net + " / " + d.gross; }, num: function (d) { return d.net; }, better: "high" },
+    { k: "₺/m² (brüt)", get: function (d) { return d.gross ? money(Math.round(d.price / d.gross)) : "?"; }, num: function (d) { return d.gross ? d.price / d.gross : null; }, better: "low" },
+    { k: "Net / brüt m²", get: function (d) { return d.net + " / " + gross(d); }, num: function (d) { return d.net; }, better: "high" },
     { k: "Oda", get: function (d) { return d.rooms; } },
     { k: "Bina yaşı", get: function (d) { return d.ageLabel; }, num: function (d) { return d.age; }, better: "low" },
     { k: "Kat", get: function (d) { return d.floor + " · " + d.floors + " katlı"; } },
@@ -96,17 +98,17 @@
     { k: "Eşyalı", get: function (d) { return eh(d.furnished); } },
     { k: "Turizm belgesi", get: function (d) { return yn(d.tourism); } },
     { k: "Krediye uygun", get: function (d) { return eh(d.loan); } },
-    { k: "Tapu", get: function (d) { return d.deed; } },
+    { k: "Tapu", get: function (d) { return nk(d.deed); } },
     { k: "Manzara", get: function (d) { return list(d.view); } },
     { k: "Cephe", get: function (d) { return list(d.facade); } },
     { k: "Asansör", get: function (d) { return yn(d.elevator); } },
-    { k: "Otopark", get: function (d) { return d.parking; } },
-    { k: "Isınma", get: function (d) { return d.heating; } },
+    { k: "Otopark", get: function (d) { return nk(d.parking); } },
+    { k: "Isınma", get: function (d) { return nk(d.heating); } },
     { k: "Takas", get: function (d) { return eh(d.swap); } },
     { k: "Öne çıkanlar", get: function (d) { return list(d.extras); } },
     { k: "İlan tarihi", get: function (d) { return date(d.listed); } },
-    { k: "Puanım", get: function (d) { var s = mine(d.id).stars; return s ? "★".repeat(s) : "—"; }, num: function (d) { return mine(d.id).stars || null; }, better: "high" },
-    { k: "Notum", get: function (d) { return mine(d.id).note || "—"; } }
+    { k: "Puan", get: function (d) { var s = mine(d.id).stars; return s ? "★".repeat(s) : "—"; }, num: function (d) { return mine(d.id).stars || null; }, better: "high" },
+    { k: "Not", get: function (d) { return mine(d.id).note || "—"; } }
   ];
 
   var SORTS = {
@@ -155,7 +157,7 @@
       "<ul class=\"chips\">" + chips + "</ul>" +
       "<dl class=\"facts\">" +
       "<dt>Oda</dt><dd>" + d.rooms + "</dd>" +
-      "<dt>Net / brüt</dt><dd>" + d.net + " / " + d.gross + " m²</dd>" +
+      "<dt>Net / brüt</dt><dd>" + d.net + " / " + gross(d) + " m²</dd>" +
       "<dt>Bina yaşı</dt><dd>" + esc(d.ageLabel) + "</dd>" +
       "<dt>Kat</dt><dd>" + esc(d.floor) + " · " + d.floors + " katlı</dd>" +
       "<dt>Aidat</dt><dd>" + (d.dues == null ? "Belirtilmemiş" : money(d.dues)) + "</dd>" +
@@ -167,7 +169,7 @@
       "<div class=\"card-actions\">" +
       "<label class=\"pick\"><input type=\"checkbox\" data-pick" + (picked ? " checked" : "") + "> Kıyasla</label>" +
       "<a class=\"link\" href=\"https://www.google.com/maps?q=" + d.lat + "," + d.lon + "\" target=\"_blank\" rel=\"noopener\">Harita ↗</a>" +
-      "<a class=\"link\" href=\"" + esc(d.url) + "\" target=\"_blank\" rel=\"noopener\">İlan ↗</a>" +
+      (d.url ? "<a class=\"link\" href=\"" + esc(d.url) + "\" target=\"_blank\" rel=\"noopener\">İlan ↗</a>" : "") +
       "</div></article>";
   }
 
@@ -181,7 +183,7 @@
     { k: "#", s: null, v: function (d) { return d.no; } },
     { k: "Daire", s: null, v: function (d) {
       return "<div class=\"row-flat\"><img class=\"thumb\" src=\"/img/" + d.id + ".webp\" alt=\"\" width=\"80\" height=\"60\" loading=\"lazy\">" +
-        "<div><a href=\"" + esc(d.url) + "\" target=\"_blank\" rel=\"noopener\">" + esc(d.title) + "</a><div class=\"fine\">" + esc(d.area) + "</div></div></div>";
+        "<div>" + (d.url ? "<a href=\"" + esc(d.url) + "\" target=\"_blank\" rel=\"noopener\">" + esc(d.title) + "</a>" : "<strong>" + esc(d.title) + "</strong>") + "<div class=\"fine\">" + esc(d.area) + "</div></div></div>";
     } },
     { k: "Fiyat", s: "price", n: 1, v: function (d) { return money(d.price); } },
     { k: "₺/m²", s: "ppm", n: 1, v: function (d) { return money(d.ppm); } },
@@ -259,7 +261,7 @@
         return "<td" + (i === best ? " class=\"better\"" : "") + ">" + esc(v) + "</td>";
       }).join("") + "</tr>";
     });
-    html += "<tr><th>İlan</th>" + p.map(function (d) { return "<td><a href=\"" + esc(d.url) + "\" target=\"_blank\" rel=\"noopener\">sahibinden ↗</a></td>"; }).join("") + "</tr></tbody>";
+    html += "<tr><th>İlan</th>" + p.map(function (d) { return "<td>" + (d.url ? "<a href=\"" + esc(d.url) + "\" target=\"_blank\" rel=\"noopener\">sahibinden ↗</a>" : "İlan yok") + "</td>"; }).join("") + "</tr></tbody>";
     $("cmpTable").innerHTML = html;
     $("compare").showModal();
   }
