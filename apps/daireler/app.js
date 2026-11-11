@@ -99,9 +99,10 @@
       return "<a class=\"" + cls + "\" href=\"" + tel(p.number) + "\">" + esc(p.type) + " " + esc(p.number) + "</a>";
     }).join("");
   }
-  function mobile(c) {
-    var m = c && (c.phones.filter(function (p) { return p.type === "Cep"; })[0] || c.phones[0]);
-    return m ? m.number : null;
+  function contactBox(c, cls) {
+    return "<details class=\"contact" + (cls ? " " + cls : "") + "\"><summary>İletişim</summary><div class=\"contact-body\"><strong>" + esc(c.office) + "</strong>" +
+      "<span>" + esc(c.agent) + (c.license ? " · Yetki belge no " + esc(c.license) : "") + "</span>" +
+      "<div class=\"phones\">" + phoneLinks(c, "call") + "</div></div></details>";
   }
   function gross(d) { return d.gross == null ? "?" : d.gross; }
   function eh(v) { return v == null ? "Belirtilmemiş" : v ? "Evet" : "Hayır"; }
@@ -134,8 +135,6 @@
     { k: "Takas", get: function (d) { return eh(d.swap); } },
     { k: "Öne çıkanlar", get: function (d) { return list(d.extras); } },
     { k: "İlan tarihi", get: function (d) { return date(d.listed); } },
-    { k: "Emlak ofisi", get: function (d) { return d.contact ? d.contact.office : "Belirtilmemiş"; } },
-    { k: "Danışman", get: function (d) { return d.contact ? d.contact.agent : "Belirtilmemiş"; } },
     { k: "Puan", get: function (d) { var s = mine(d.id).stars; return s ? "★".repeat(s) : "—"; }, num: function (d) { return mine(d.id).stars || null; }, better: "high" },
     { k: "Not", get: function (d) { return mine(d.id).note || "—"; } }
   ];
@@ -195,11 +194,7 @@
       "</dl>" +
       (d.warnings && d.warnings.length ? "<div class=\"warn\"><strong>Dikkat</strong><ul>" + d.warnings.map(function (w) { return "<li>" + esc(w) + "</li>"; }).join("") + "</ul></div>" : "") +
       notes +
-      (d.contact
-        ? "<div class=\"contact\"><strong>" + esc(d.contact.office) + "</strong>" +
-          "<span>" + esc(d.contact.agent) + (d.contact.license ? " · Yetki belge no " + esc(d.contact.license) : "") + "</span>" +
-          "<div class=\"phones\">" + phoneLinks(d.contact, "call") + "</div></div>"
-        : "<div class=\"contact none\">İletişim bilgisi yok</div>") +
+      (d.contact ? contactBox(d.contact) : "<div class=\"contact none\">İletişim bilgisi yok</div>") +
       "<div class=\"card-actions\">" +
       "<label class=\"pick\"><input type=\"checkbox\" data-pick" + (picked ? " checked" : "") + "> Kıyasla</label>" +
       "<a class=\"link\" href=\"https://www.google.com/maps?q=" + d.lat + "," + d.lon + "\" target=\"_blank\" rel=\"noopener\">Harita ↗</a>" +
@@ -295,7 +290,7 @@
         return "<td" + (i === best ? " class=\"better\"" : "") + ">" + esc(v) + "</td>";
       }).join("") + "</tr>";
     });
-    html += "<tr><th>Telefon</th>" + p.map(function (d) { return "<td>" + (d.contact ? phoneLinks(d.contact, "call") : "Belirtilmemiş") + "</td>"; }).join("") + "</tr>";
+    html += "<tr><th>İletişim</th>" + p.map(function (d) { return "<td>" + (d.contact ? contactBox(d.contact, "flat") : "Belirtilmemiş") + "</td>"; }).join("") + "</tr>";
     html += "<tr><th>İlan</th>" + p.map(function (d) { return "<td>" + (d.url ? "<a href=\"" + esc(d.url) + "\" target=\"_blank\" rel=\"noopener\">sahibinden ↗</a>" : "İlan yok") + "</td>"; }).join("") + "</tr></tbody>";
     $("cmpTable").innerHTML = html;
     $("compare").showModal();
@@ -337,7 +332,7 @@
       L.marker([d.lat, d.lon], { icon: L.divIcon({ className: "", html: "<div class=\"pin\">" + d.no + "</div>", iconSize: [28, 28], iconAnchor: [14, 14] }) })
         .addTo(m).bindPopup("<div class=\"pop\"><img src=\"/img/" + d.id + ".webp\" alt=\"\" width=\"528\" height=\"396\" loading=\"lazy\">" +
           "<strong>#" + d.no + " " + esc(d.title) + "</strong><span>" + money(d.price) + " · " + d.rooms + " · " + esc(d.area) + "</span>" +
-          (d.contact ? "<span>" + esc(d.contact.office) + (mobile(d.contact) ? " · <a href=\"" + tel(mobile(d.contact)) + "\">" + esc(mobile(d.contact)) + "</a>" : "") + "</span>" : "") +
+          (d.contact ? contactBox(d.contact, "flat") : "") +
           (d.url ? "<a href=\"" + esc(d.url) + "\" target=\"_blank\" rel=\"noopener\">İlan ↗</a>" : "") + "</div>",
           { maxWidth: 240, minWidth: 180, keepInView: true, autoPanPaddingTopLeft: [10, 10], autoPanPaddingBottomRight: [10, 10] });
       return [d.lat, d.lon];
@@ -347,7 +342,9 @@
     fullscreen(m);
     m.on("popupopen", function (e) {
       var w = Math.min(240, m.getSize().x - 76), o = e.popup.options;
-      if (o.maxWidth !== w) { o.maxWidth = w; o.minWidth = Math.min(180, w); e.popup.update(); }
+      var box = e.popup.getElement().querySelector("details");
+    if (box) box.addEventListener("toggle", function () { e.popup.update(); });
+    if (o.maxWidth !== w) { o.maxWidth = w; o.minWidth = Math.min(180, w); e.popup.update(); }
     });
   }
 
