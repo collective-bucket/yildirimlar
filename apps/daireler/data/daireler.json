@@ -278,5 +278,145 @@
       "Otopark yok.",
       "Aidat belirtilmemiş."
     ]
+  },
+  {
+    "id": "1341150877",
+    "url": "https://www.sahibinden.com/ilan/emlak-konut-satilik-aydin-gayrimenkul-den-harika-konumda-satilik-firsat-2-plus1-daire-1341150877/detay",
+    "title": "Geniş eşyalı 2+1, üç balkon, Erasta'ya yürüme",
+    "area": "Taşyaka",
+    "lat": 36.61987158461522,
+    "lon": 29.124515099961112,
+    "price": 5550000,
+    "gross": 110,
+    "net": 105,
+    "rooms": "2+1",
+    "age": 18,
+    "ageLabel": "16–20",
+    "floor": "3. kat (en üst kat)",
+    "floors": 3,
+    "dues": null,
+    "site": false,
+    "pool": false,
+    "furnished": true,
+    "loan": false,
+    "deed": "Kat mülkiyetli",
+    "tourism": false,
+    "swap": true,
+    "elevator": false,
+    "parking": "Açık otopark",
+    "heating": "Klima",
+    "bathrooms": 1,
+    "view": [],
+    "facade": [
+      "Batı",
+      "Doğu",
+      "Güney",
+      "Kuzey"
+    ],
+    "extras": [
+      "3 balkon (1'i kapalı)",
+      "Salondan ayrı geniş mutfak",
+      "Geniş bahçe, barbekü",
+      "Enerji sınıfı C"
+    ],
+    "listed": "2026-11-04",
+    "warnings": [
+      "Tabloda \"site içi: hayır\", açıklamada \"site içerisinde\" yazıyor.",
+      "Tabloda \"krediye uygun: hayır\", açıklamada \"konut kredisine uygundur\" yazıyor; sor.",
+      "Brüt 110 / net 105 m² birbirine çok yakın; ölçüyü doğrula.",
+      "Mülk sahibi yatırımcıya kiracı olarak kalmayı ve fiyatta indirim teklif ediyor.",
+      "Aidat belirtilmemiş."
+    ]
+  },
+  {
+    "id": "1315451029",
+    "url": "https://www.sahibinden.com/ilan/emlak-konut-satilik-karaculha-calica-da-cadde-uzeri-2-plus1-daire-1315451029/detay",
+    "title": "Cadde üzeri 2+1, 2 banyo, güney cephe",
+    "area": "Karaçulha (Çalıca)",
+    "lat": 36.64181532705584,
+    "lon": 29.17398478835821,
+    "price": 4955000,
+    "gross": 85,
+    "net": 75,
+    "rooms": "2+1",
+    "age": 10,
+    "ageLabel": "6–10",
+    "floor": "3. kat (en üst kat)",
+    "floors": 3,
+    "dues": null,
+    "site": false,
+    "pool": false,
+    "furnished": null,
+    "loan": null,
+    "deed": "Kat irtifaklı",
+    "tourism": false,
+    "swap": true,
+    "elevator": false,
+    "parking": "Yok",
+    "heating": "Klima",
+    "bathrooms": 2,
+    "view": [
+      "Doğa"
+    ],
+    "facade": [
+      "Güney"
+    ],
+    "extras": [
+      "Amerikan mutfak",
+      "Durak ve dolmuş yolu üzerinde",
+      "Market, eczane, okul, pazar yakın",
+      "Boş, hemen teslim"
+    ],
+    "listed": "2026-11-10",
+    "warnings": [
+      "Açıklamada bina 10, daire 3 yaşında yazıyor; farkın nedenini sor.",
+      "Bina 10 yıllık ama kat irtifaklı; iskânı sor.",
+      "Krediye uygunluk ve eşya durumu belirtilmemiş.",
+      "Otopark yok.",
+      "Aidat belirtilmemiş."
+    ]
+  },
+  {
+    "id": "1326418008",
+    "url": "https://www.sahibinden.com/ilan/emlak-konut-satilik-nevk-ten-sehir-merkezinde-sik-kullanisli-genis-1-plus1daire-1326418008/detay",
+    "title": "Merkezde geniş 1+1, yerden ısıtma, sahile 400 m",
+    "area": "Cumhuriyet (merkez)",
+    "lat": 36.62146669007501,
+    "lon": 29.109632223844528,
+    "price": 4900000,
+    "gross": 95,
+    "net": 89,
+    "rooms": "1+1",
+    "age": 23,
+    "ageLabel": "21–25",
+    "floor": "3. kat (en üst kat)",
+    "floors": 3,
+    "dues": 50,
+    "site": false,
+    "pool": false,
+    "furnished": false,
+    "loan": true,
+    "deed": "Kat mülkiyetli",
+    "tourism": false,
+    "swap": false,
+    "elevator": false,
+    "parking": "Yok",
+    "heating": "Yerden ısıtma",
+    "bathrooms": 1,
+    "view": [],
+    "facade": [],
+    "extras": [
+      "Sahile ~400 m",
+      "Klimalar ve ankastre set dahil",
+      "Kapalı mutfak",
+      "Enerji sınıfı D"
+    ],
+    "listed": "2026-11-07",
+    "warnings": [
+      "Kiracılı.",
+      "Balkon yok.",
+      "Bina 21–25 yaşında; yapı durumunu sor.",
+      "Otopark yok."
+    ]
   }
 ]

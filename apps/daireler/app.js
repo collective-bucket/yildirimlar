@@ -19,7 +19,7 @@
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]; }); }
   function money(n) { return tl.format(n) + " ₺"; }
   function yn(v) { return v ? "Var" : "Yok"; }
-  function eh(v) { return v ? "Evet" : "Hayır"; }
+  function eh(v) { return v == null ? "Belirtilmemiş" : v ? "Evet" : "Hayır"; }
   function date(s) { return new Date(s + "T00:00:00").toLocaleDateString("tr-TR", { day: "numeric", month: "short", year: "numeric" }); }
   function list(a) { return a && a.length ? a.join(", ") : "—"; }
 
@@ -73,7 +73,7 @@
     var m = mine(d.id), picked = state.picked.indexOf(d.id) > -1;
     var chips = [
       ["Site içi", d.site], ["Havuz", d.pool], ["Eşyalı", d.furnished], ["Turizm belgesi", d.tourism], ["Krediye uygun", d.loan]
-    ].map(function (c) { return "<li class=\"" + (c[1] ? "yes" : "") + "\">" + (c[1] ? "✓ " : "✗ ") + c[0] + "</li>"; }).join("");
+    ].map(function (c) { return "<li class=\"" + (c[1] ? "yes" : "") + "\">" + (c[1] == null ? "? " : c[1] ? "✓ " : "✗ ") + c[0] + "</li>"; }).join("");
     var stars = [1, 2, 3, 4, 5].map(function (n) {
       return "<button type=\"button\" data-star=\"" + n + "\" class=\"" + (n <= m.stars ? "on" : "") + "\" aria-label=\"" + n + " yıldız\">★</button>";
     }).join("");
