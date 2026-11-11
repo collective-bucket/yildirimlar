@@ -105,7 +105,11 @@ th, td { padding: .5rem .65rem; border-bottom: 1px solid var(--line); text-align
 
 .map-wrap { margin-top: 2rem; }
 .map-wrap h2 { font-size: 1.35rem; margin-bottom: .75rem; }
-#map { height: 22rem; border-radius: var(--radius); border: 1px solid var(--line); z-index: 0; }
+#map { height: 32rem; border-radius: var(--radius); border: 1px solid var(--line); z-index: 0; }
+#map.full { position: fixed !important; inset: 0; height: 100vh; height: 100dvh; border-radius: 0; border: 0; z-index: 1000; }
+body.map-open { overflow: hidden; }
+.map-full-btn { display: grid; place-items: center; width: 34px; height: 34px; border: 0; background: #fff; font-size: 1.1rem; line-height: 34px; cursor: pointer; border-radius: 4px; color: var(--ink); }
+.map-full-btn:hover { background: #f4f4f4; }
 .pin { background: var(--deep); color: #fff; border: 2px solid #fff; border-radius: 50%; width: 28px; height: 28px;
   display: grid; place-items: center; font-weight: 600; font-size: .85rem; box-shadow: 0 1px 4px rgba(0,0,0,.35); }
 .fine { color: var(--muted); font-size: .82rem; margin: .5rem 0 0; }
@@ -139,7 +143,9 @@ dialog .fine { padding: 0 1.1rem 1rem; }
   .toolbar label { width: 100%; }
   .toolbar select { flex: 1; }
   .slider { grid-auto-columns: 88%; }
-  #map { height: 16rem; }
+  #map { height: 28rem; height: min(28rem, 75svh); }
+  .pop img { max-height: 7.5rem; }
+  .leaflet-popup-content { margin: .7rem .8rem; }
   .compare-bar { width: calc(100vw - 1.5rem); justify-content: space-between; }
   #compareInfo { font-size: .85rem; }
 }

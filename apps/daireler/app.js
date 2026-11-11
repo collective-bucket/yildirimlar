@@ -283,6 +283,32 @@
     $("compare").showModal();
   }
 
+  function fullscreen(m) {
+    var el = $("map"), btn;
+    function toggle(on) {
+      el.classList.toggle("full", on);
+      document.body.classList.toggle("map-open", on);
+      btn.innerHTML = on ? "✕" : "<svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\"><path d=\"M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5\"/></svg>";
+      btn.title = on ? "Tam ekrandan çık" : "Tam ekran"; btn.setAttribute("aria-label", btn.title);
+      btn.setAttribute("aria-pressed", on);
+      on ? m.scrollWheelZoom.enable() : m.scrollWheelZoom.disable();
+      m.invalidateSize();
+    }
+    var Ctl = L.Control.extend({
+      onAdd: function () {
+        var box = L.DomUtil.create("div", "leaflet-bar");
+        btn = L.DomUtil.create("button", "map-full-btn", box);
+        btn.type = "button";
+        L.DomEvent.disableClickPropagation(box);
+        L.DomEvent.on(btn, "click", function () { toggle(!el.classList.contains("full")); });
+        return box;
+      }
+    });
+    m.addControl(new Ctl({ position: "topright" }));
+    toggle(false);
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && el.classList.contains("full")) toggle(false); });
+  }
+
   function map() {
     if (!window.L) { $("map").textContent = "Harita yüklenemedi."; return; }
     var m = L.map("map", { scrollWheelZoom: false });
@@ -293,11 +319,17 @@
       L.marker([d.lat, d.lon], { icon: L.divIcon({ className: "", html: "<div class=\"pin\">" + d.no + "</div>", iconSize: [28, 28], iconAnchor: [14, 14] }) })
         .addTo(m).bindPopup("<div class=\"pop\"><img src=\"/img/" + d.id + ".webp\" alt=\"\" width=\"528\" height=\"396\" loading=\"lazy\">" +
           "<strong>#" + d.no + " " + esc(d.title) + "</strong><span>" + money(d.price) + " · " + d.rooms + " · " + esc(d.area) + "</span>" +
-          (d.url ? "<a href=\"" + esc(d.url) + "\" target=\"_blank\" rel=\"noopener\">İlan ↗</a>" : "") + "</div>", { maxWidth: 240, minWidth: 220 });
+          (d.url ? "<a href=\"" + esc(d.url) + "\" target=\"_blank\" rel=\"noopener\">İlan ↗</a>" : "") + "</div>",
+          { maxWidth: 240, minWidth: 180, keepInView: true, autoPanPaddingTopLeft: [10, 10], autoPanPaddingBottomRight: [10, 10] });
       return [d.lat, d.lon];
     });
     L.circleMarker(CENTER, { radius: 5, color: "#52615a", weight: 2, fillOpacity: .6 }).addTo(m).bindTooltip("Fethiye merkez");
     m.fitBounds(pts.concat([CENTER]), { padding: [30, 30] });
+    fullscreen(m);
+    m.on("popupopen", function (e) {
+      var w = Math.min(240, m.getSize().x - 76), o = e.popup.options;
+      if (o.maxWidth !== w) { o.maxWidth = w; o.minWidth = Math.min(180, w); e.popup.update(); }
+    });
   }
 
   function bind() {
