@@ -29,3 +29,4 @@ jobs:
       - run: npm run check
       - run: npm run stamp
       - run: npx firebase-tools deploy --only hosting:yildirimlar --token "${{ steps.auth.outputs.access_token }}" --non-interactive
+      - run: npx firebase-tools deploy --only hosting:test --token "${{ steps.auth.outputs.access_token }}" --non-interactive

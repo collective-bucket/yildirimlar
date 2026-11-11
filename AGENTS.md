@@ -5,4 +5,4 @@
 - Data JSON text fields are `{ en, tr }`.
 - Never publish real names of people; turn them into roles in `public/data/roles.json`.
 - Firestore rules are changed only in collective-bucket/firestore.
-- `apps/daireler` is the test site (hosting target `test`, site `cbucket-yildirimlar-test`, test.yildirimlar.co); deploy with `npm run deploy:test`. Listings live in `apps/daireler/data/daireler.json`.
+- `apps/daireler` is the test site (hosting target `test`, site `cbucket-yildirimlar-test`, test.yildirimlar.co); CI deploys it on push to `main` (manual: `npm run deploy:test`). Listings live in `apps/daireler/data/daireler.json`.
