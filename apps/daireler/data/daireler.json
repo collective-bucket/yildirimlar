@@ -1,6 +1,7 @@
 [
   {
     "id": "1325633405",
+    "contact": {"office": "DURAL HOMES", "license": "4801627", "agent": "Salih Dural", "phones": [{"type": "Cep", "number": "0 (536) 429 09 28"}]},
     "url": "https://www.sahibinden.com/ilan/emlak-konut-satilik-fethiye-de-havuzlu-sitede-deniz-manzarali-3-plus1-satilik-daire-1325633405/detay",
     "title": "Deniz manzaralı 3+1 çatı dubleksi",
     "area": "Karaçulha",
@@ -34,6 +35,7 @@
   },
   {
     "id": "1330747133",
+    "contact": {"office": "Mykonut Gayrimenkul", "license": "4800231", "agent": "Uğur Selman Toprak", "phones": [{"type": "İş", "number": "0 (252) 612 50 88"}, {"type": "İş", "number": "0 (850) 888 50 88"}, {"type": "Cep", "number": "0 (549) 838 26 37"}]},
     "url": "https://www.sahibinden.com/ilan/emlak-konut-satilik-mykonut-tan-fethiye-camkoy-de-havuzlu-binada-satilik-1-plus1-daire-1330747133/detay",
     "title": "Havuza açılan giriş kat 1+1",
     "area": "Çamköy",
@@ -67,6 +69,7 @@
   },
   {
     "id": "1346807575",
+    "contact": {"office": "TURANLAR GRUP", "license": "4801858", "agent": "Yusuf Öztürk", "phones": [{"type": "Cep", "number": "0 (531) 935 72 98"}]},
     "videos": [{ "url": "https://www.youtube.com/shorts/wY4kNzoJs1g", "label": "Dış" }, { "url": "https://www.youtube.com/shorts/T1hSUMRjrOk", "label": "İç" }],
     "url": "https://www.sahibinden.com/ilan/emlak-konut-satilik-turanlar-gruptan-ovacikta-satilik-turizm-belgeli-esyali-1-plus1daire-1346807575/detay",
     "title": "Eşyalı, turizm belgeli 1+1 bahçe katı",
@@ -111,6 +114,7 @@
     "heating": "Salonda klima",
     "bathrooms": 2,
     "id": "1329641760",
+    "contact": {"office": "FETHİYE ÖĞRETMEN EMLAK", "license": "4801017", "agent": "Ramazan K.", "phones": [{"type": "Cep", "number": "0 (553) 481 66 63"}]},
     "aiPhoto": true,
     "url": "https://www.sahibinden.com/ilan/emlak-konut-satilik-esenkoy-cevreyolu-uzerinde-ofis-tapulu-2-plus1-satilik-daire-1329641760/detay",
     "title": "Asansörlü 2+1 çatı dubleksi, 2 banyo",
@@ -149,6 +153,7 @@
     "heating": "Klima",
     "bathrooms": 1,
     "id": "1343336522",
+    "contact": {"office": "Fethiye Füsun Emlak", "license": "4800021", "agent": "Savaş Karakaya", "phones": [{"type": "İş", "number": "0 (252) 613 28 21"}, {"type": "Cep", "number": "0 (542) 626 87 38"}]},
     "url": "https://www.sahibinden.com/ilan/emlak-konut-satilik-fusun-emlak-tan-camkoy-mah-ara-kat-yeni-1-plus1-daire-satiliktir-1343336522/detay",
     "title": "Yeni 1+1, düşük aidat",
     "area": "Çamköy",
@@ -185,6 +190,7 @@
     "heating": "Klima",
     "bathrooms": 1,
     "id": "1336288685",
+    "contact": {"office": "Goldhouse Gayrimenkul Danışmanlık Fethiye", "license": "4801408", "agent": "Selçuk Yılmaz", "phones": [{"type": "İş", "number": "0 (252) 611 34 34"}, {"type": "İş", "number": "0 (252) 611 34 54"}, {"type": "Cep", "number": "0 (545) 616 11 11"}]},
     "url": "https://www.sahibinden.com/ilan/emlak-konut-satilik-goldhouse-dan-satilik-daire-2-plus1-genis-foca-mahallesinde-1336288685/detay",
     "title": "Geniş 2+1, cadde başında",
     "area": "Foça",
@@ -218,6 +224,7 @@
     "heating": "Klima",
     "bathrooms": 1,
     "id": "1338719219",
+    "contact": {"office": "Mykonut Gayrimenkul", "license": "4800231", "agent": "Koray Küçükekiz", "phones": [{"type": "İş", "number": "0 (252) 612 50 88"}, {"type": "İş", "number": "0 (850) 888 50 88"}, {"type": "Cep", "number": "0 (541) 376 77 88"}]},
     "url": "https://www.sahibinden.com/ilan/emlak-konut-satilik-mykonut-tan-patlangic-mh-2-plus1-esyali-deniz-manzarali-daire-1338719219/detay",
     "title": "Eşyalı 2+1, balkondan deniz ve gün batımı",
     "area": "Patlangıç (Hıdırlık)",
@@ -251,6 +258,7 @@
     "heating": "Klima",
     "bathrooms": 1,
     "id": "1334248312",
+    "contact": {"office": "STOP GAYRİMENKUL/EMLAK DANIŞMANLIĞI", "license": "4801510", "agent": "Leyla Metin", "phones": [{"type": "İş", "number": "0 (252) 502 16 17"}, {"type": "Cep", "number": "0 (532) 437 78 20"}]},
     "url": "https://www.sahibinden.com/ilan/emlak-konut-satilik-stoptan-yeni-mahallede-denize-yurume-mesafesinde-1-plus1-bahcekati-1334248312/detay",
     "title": "İnşaat hâlinde 1+1 bahçe katı, denize 1 km",
     "area": "Yeni Mahalle",
@@ -283,6 +291,7 @@
   },
   {
     "id": "1341150877",
+    "contact": {"office": "AYDIN GAYRİMENKUL", "license": "4802264", "agent": "Hüseyin Aydın", "phones": [{"type": "Cep", "number": "0 (536) 719 34 69"}]},
     "videos": [{ "url": "https://www.youtube.com/shorts/ayTxeMANoh8", "label": "Dış" }, { "url": "https://www.youtube.com/shorts/6mrR9TN5m0c", "label": "İç" }],
     "url": "https://www.sahibinden.com/ilan/emlak-konut-satilik-aydin-gayrimenkul-den-harika-konumda-satilik-firsat-2-plus1-daire-1341150877/detay",
     "title": "Geniş eşyalı 2+1, üç balkon, Erasta'ya yürüme",
@@ -333,6 +342,7 @@
   },
   {
     "id": "1315451029",
+    "contact": {"office": "İSA SABANCI İNŞAAT EMLAK", "license": "4802812", "agent": "İsa Sabancı", "phones": [{"type": "Cep", "number": "0 (533) 696 00 48"}]},
     "url": "https://www.sahibinden.com/ilan/emlak-konut-satilik-karaculha-calica-da-cadde-uzeri-2-plus1-daire-1315451029/detay",
     "title": "Cadde üzeri 2+1, 2 banyo, güney cephe",
     "area": "Karaçulha (Çalıca)",
@@ -381,6 +391,7 @@
   },
   {
     "id": "1326418008",
+    "contact": {"office": "NEVK YATIRIM EMLAK İNŞAAT", "license": "4802589", "agent": "Oğuz Akan", "phones": [{"type": "İş", "number": "0 (252) 613 70 99"}, {"type": "Cep", "number": "0 (553) 072 28 90"}]},
     "url": "https://www.sahibinden.com/ilan/emlak-konut-satilik-nevk-ten-sehir-merkezinde-sik-kullanisli-genis-1-plus1daire-1326418008/detay",
     "title": "Merkezde geniş 1+1, yerden ısıtma, sahile 400 m",
     "area": "Cumhuriyet (merkez)",

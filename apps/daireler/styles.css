@@ -189,3 +189,11 @@ dialog.narrow { width: min(24rem, calc(100vw - 1.5rem)); }
 .pop img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: .4rem; margin-bottom: .2rem; }
 .pop span { color: var(--muted, #555); }
 .pop a { font-weight: 600; }
+
+.contact { display: grid; gap: .15rem; margin: .75rem 1.1rem 0; padding: .75rem .85rem; border: 1px solid var(--line); border-radius: .6rem; background: var(--raised); font-size: .9rem; }
+.contact span { color: var(--muted); font-size: .84rem; }
+.contact.none { color: var(--muted); font-size: .85rem; }
+.phones { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .4rem; }
+.call { display: inline-flex; align-items: center; padding: .3rem .65rem; border-radius: 999px; border: 1px solid var(--line); background: #fff; font-size: .84rem; text-decoration: none; white-space: nowrap; }
+.call:hover { border-color: var(--accent); }
+.cmp td .call { margin: 0 .3rem .3rem 0; }

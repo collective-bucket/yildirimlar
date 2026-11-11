@@ -74,4 +74,8 @@ JSON.parse(fs.readFileSync(path.join(daireler, "data", "daireler.json"), "utf8")
   assert.ok(fs.existsSync(path.join(daireler, "img", d.id + ".webp")), "daireler[" + i + "]: missing img/" + d.id + ".webp");
   ["lat", "lon", "price", "net", "age"].forEach(function (k) { assert.ok(typeof d[k] === "number", "daireler[" + i + "]." + k + " must be a number"); });
   assert.ok(d.gross === null || typeof d.gross === "number", "daireler[" + i + "].gross must be a number or null");
+  if (d.contact != null) {
+    assert.ok(typeof d.contact.office === "string" && typeof d.contact.agent === "string", "daireler[" + i + "].contact needs office and agent");
+    assert.ok(Array.isArray(d.contact.phones) && d.contact.phones.every(function (p) { return /^0 \(\d{3}\) \d{3} \d\d \d\d$/.test(p.number); }), "daireler[" + i + "].contact.phones must be 0 (xxx) xxx xx xx");
+  }
 });
